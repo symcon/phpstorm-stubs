@@ -3,7 +3,7 @@
 [![official JetBrains project](http://jb.gg/badges/official.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
 [![Build Status](https://travis-ci.org/artspb/phpstorm-library-plugin.svg?branch=master)](https://travis-ci.org/artspb/phpstorm-library-plugin)
 
-The repository is intended to demonstrate how to use a new "libraryRoot" API of PhpStorm. It consists of two parts:
+The repository is intended to demonstrate how to use a "libraryRoot" API of PhpStorm. It consists of two parts:
 
 1. `plugin.xml` which contains a simple extension point implementation:
 
