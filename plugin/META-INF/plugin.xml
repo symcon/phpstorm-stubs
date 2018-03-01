@@ -1,21 +1,17 @@
 <idea-plugin version="2">
-  <id>me.artpsb.idea.plugin.library</id>
-  <name>Library</name>
-  <version>0.2</version>
-  <vendor email="contact@artspb.me" url="https://artspb.me">Artem Khvastunov</vendor>
+  <id>de.symcon.idea.plugin.library</id>
+  <name>Library for IP-Symcon</name>
+  <version>1.0</version>
+  <vendor email="office@symcon.de" url="https://www.symcon.de">Symcon GmbH</vendor>
 
   <description><![CDATA[
-    Provides support of the Library.
+    Provides support for IP-Symcon
   ]]></description>
 
   <change-notes><![CDATA[
-    <h3>0.2</h3>
+    <h3>1.0</h3>
     <ul>
-      <li>Release upload test.</li>
-    </ul>
-    <h3>0.1</h3>
-    <ul>
-      <li>Initial support.</li>
+      <li>Initial support for IP-Symcon 5.0</li>
     </ul>
   ]]>
   </change-notes>
@@ -26,6 +22,6 @@
   <depends>com.jetbrains.php</depends>
 
   <extensions defaultExtensionNs="com.jetbrains.php">
-    <libraryRoot id="library" path="/library/" runtime="false"/>
+    <libraryRoot id="symcon" path="/symcon/" runtime="false"/>
   </extensions>
 </idea-plugin>
