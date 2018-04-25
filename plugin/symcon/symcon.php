@@ -843,7 +843,7 @@ class IPSModule {
     protected function RegisterPropertyInteger(string $Name, int $DefaultValue) { return true; }
     protected function RegisterPropertyFloat(string $Name, float $DefaultValue) { return true; }
     protected function RegisterPropertyString(string $Name, string $DefaultValue) { return true; }
-    protected function RegisterTimer(string $Ident, int $Milliseconds, string $ScriptText) { return true; }
+    protected function RegisterTimer(string $Ident, int $Milliseconds, string $ScriptText) { return 0; }
     protected function SetTimerInterval(string $Ident, int $Milliseconds) { return true; }
     protected function RegisterScript(string $Ident, string $Name, string $Content = '', int $Position = 0) { return 0; }
     protected function RegisterVariableBoolean(string $Ident, string $Name, string $Profile = '', int $Position = 0) { return 0; }
@@ -857,9 +857,9 @@ class IPSModule {
     protected function MaintainAction(string $Ident, bool $Keep) { return true; }
     protected function SetValue(string $Ident, $Value) { return true; }
     protected function ReadPropertyBoolean(string $Name) { return true; }
-    protected function ReadPropertyInteger(string $Name) { return true; }
-    protected function ReadPropertyFloat(string $Name) { return true; }
-    protected function ReadPropertyString(string $Name) { return true; }
+    protected function ReadPropertyInteger(string $Name) { return 0; }
+    protected function ReadPropertyFloat(string $Name) { return 0.0; }
+    protected function ReadPropertyString(string $Name) { return ''; }
     protected function SendDataToParent(string $Data) { return ''; }
     protected function SendDataToChildren(string $Data) { return true; }
     protected function ConnectParent(string $ModuleID) { return true; }
