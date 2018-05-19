@@ -874,6 +874,7 @@ class IPSModule {
     protected function UnregisterMessage(int $SenderID, int $Message) { return true; }
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data) { return true; }
     public function ApplyChanges() { return true; }
+    protected function LogMessage(string $Message, int $Type) { return true; }
     protected function SetReceiveDataFilter(string $RequiredRegexMatch) { return true; }
     public function ReceiveData($JSONString) { return true; }
     protected function SetForwardDataFilter(string $RequiredRegexMatch) { return true; }
