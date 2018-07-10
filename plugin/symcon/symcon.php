@@ -652,6 +652,8 @@ function RegVar_SendEvent(int $InstanceID, int $ReportID, string $Text) { return
 function RegVar_SendPacket(int $InstanceID, string $Text, string $ClientIP, int $ClientPort) { return true; }
 function RegVar_SendText(int $InstanceID, string $Text) { return true; }
 function RegVar_SetBuffer(int $InstanceID, string $Text) { return true; }
+function RequestAction(string $Ident, $Value) { return true; }
+function RequestActionEx(string $Ident, $Value, string $Sender) { return true; }
 function S7_RequestRead(int $InstanceID) { return true; }
 function S7_Write(int $InstanceID, float $Value) { return true; }
 function S7_WriteBit(int $InstanceID, bool $Value) { return true; }
@@ -855,6 +857,7 @@ class IPSModule {
     protected function EnableAction(string $Ident) { return true; }
     protected function DisableAction(string $Ident) { return true; }
     protected function MaintainAction(string $Ident, bool $Keep) { return true; }
+    protected function GetValue(string $Ident) { return ''; }
     protected function SetValue(string $Ident, $Value) { return true; }
     protected function ReadPropertyBoolean(string $Name) { return true; }
     protected function ReadPropertyInteger(string $Name) { return 0; }
@@ -872,6 +875,7 @@ class IPSModule {
     protected function SendDebug(string $Message, string $Data, int $Format) { return true; }
     protected function RegisterMessage(int $SenderID, int $Message) { return true; }
     protected function UnregisterMessage(int $SenderID, int $Message) { return true; }
+    protected function GetMessageList() { return []; }
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data) { return true; }
     public function ApplyChanges() { return true; }
     protected function LogMessage(string $Message, int $Type) { return true; }
