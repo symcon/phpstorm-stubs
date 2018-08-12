@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>de.symcon.idea.plugin.library</id>
   <name>Library for IP-Symcon</name>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
   <vendor email="office@symcon.de" url="https://www.symcon.de">Symcon GmbH</vendor>
 
   <description><![CDATA[
