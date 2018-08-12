@@ -872,6 +872,7 @@ class IPSModule {
     protected function SetSummary(string $Summary) { return true; }
     protected function SetBuffer(string $Name, string $Data) { return true; }
     protected function GetBuffer(string $Name) { return ''; }
+    protected function GetBufferList() { return []; }
     protected function SendDebug(string $Message, string $Data, int $Format) { return true; }
     protected function RegisterMessage(int $SenderID, int $Message) { return true; }
     protected function UnregisterMessage(int $SenderID, int $Message) { return true; }
