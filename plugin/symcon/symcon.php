@@ -35,6 +35,47 @@ $_IPS = array (
     'CLIENTPORT' => 0,
 );
 
+define('MODULETYPE_CORE', 0);
+define('MODULETYPE_IO', 1);
+define('MODULETYPE_SPLITTER', 2);
+define('MODULETYPE_DEVICE', 3);
+define('MODULETYPE_CONFIGURATOR', 4);
+define('MODULETYPE_DISCOVERY', 5);
+define('OBJECTTYPE_CATEGORY', 0);
+define('OBJECTTYPE_INSTANCE', 1);
+define('OBJECTTYPE_VARIABLE', 2);
+define('OBJECTTYPE_SCRIPT', 3);
+define('OBJECTTYPE_EVENT', 4);
+define('OBJECTTYPE_MEDIA', 5);
+define('OBJECTTYPE_LINK', 6);
+define('VARIABLETYPE_BOOLEAN', 0);
+define('VARIABLETYPE_INTEGER', 1);
+define('VARIABLETYPE_FLOAT', 2);
+define('VARIABLETYPE_STRING', 3);
+define('EVENTTYPE_TRIGGER', 0);
+define('EVENTTYPE_CYCLIC', 1);
+define('EVENTTYPE_SCHEDULE', 2);
+define('EVENTTRIGGERTYPE_ONUPDATE', 0);
+define('EVENTTRIGGERTYPE_ONCHANGE', 1);
+define('EVENTTRIGGERTYPE_ONLIMITEXCEED', 2);
+define('EVENTTRIGGERTYPE_ONLIMITDROP', 3);
+define('EVENTTRIGGERTYPE_ONVALUE', 4);
+define('EVENTCYCLICDATETYPE_NONE', 0);
+define('EVENTCYCLICDATETYPE_ONCE', 1);
+define('EVENTCYCLICDATETYPE_DAY', 2);
+define('EVENTCYCLICDATETYPE_WEEK', 3);
+define('EVENTCYCLICDATETYPE_MONTH', 4);
+define('EVENTCYCLICDATETYPE_YEAR', 5);
+define('EVENTCYCLICTIMETYPE_ONCE', 0);
+define('EVENTCYCLICTIMETYPE_SECOND', 1);
+define('EVENTCYCLICTIMETYPE_MINUTE', 2);
+define('EVENTCYCLICTIMETYPE_HOUR', 3);
+define('EVENTCONDITIONCOMPARISON_EQUAL', 0);
+define('EVENTCONDITIONCOMPARISON_NOTEQUAL', 1);
+define('EVENTCONDITIONCOMPARISON_GREATER', 2);
+define('EVENTCONDITIONCOMPARISON_GREATEROREQUAL', 3);
+define('EVENTCONDITIONCOMPARISON_SMALLER', 4);
+define('EVENTCONDITIONCOMPARISON_SMALLEROREQUAL', 5);
 define('IPS_BASE', 10000);
 define('IPS_MODULEBASE', 20000);
 define('IPS_KERNELSTARTED', 10001);
@@ -79,6 +120,7 @@ define('IM_CONNECT', 10503);
 define('IM_DISCONNECT', 10504);
 define('IM_CHANGESTATUS', 10505);
 define('IM_CHANGESETTINGS', 10506);
+define('IM_CHANGEATTRIBUTE', 10507);
 define('IM_SEARCHMESSAGE', 10510);
 define('IM_SEARCHSTART', 10511);
 define('IM_SEARCHSTOP', 10512);
@@ -94,6 +136,7 @@ define('SM_CREATE', 10701);
 define('SM_DELETE', 10702);
 define('SM_CHANGEFILE', 10703);
 define('SM_BROKEN', 10704);
+define('SM_UPDATE', 10705);
 define('IPS_EVENTMESSAGE', 10800);
 define('EM_CREATE', 10801);
 define('EM_DELETE', 10802);
@@ -171,16 +214,18 @@ define('IS_CREATING', 101);
 define('IS_ACTIVE', 102);
 define('IS_DELETING', 103);
 define('IS_INACTIVE', 104);
+define('IS_NOTCREATED', 105);
 define('IS_EBASE', 200);
-define('IS_NOTCREATED', 201);
 define('IF_UNKNOWN', 0);
 define('IF_NEW', 1);
 define('IF_OLD', 2);
 define('IF_CURRENT', 3);
 define('IF_UNSUPPORTED', 4);
 
+function AC_AddLoggedValues(int $InstanceID, int $VariableID, array $Values) { return true; }
 function AC_ChangeVariableID(int $InstanceID, int $OldVariableID, int $NewVariableID) { return true; }
-function AC_DeleteVariableData(int $InstanceID, int $VariableID, int $StartTime, int $EndTime) { return true; }
+function AC_DeleteVariableData(int $InstanceID, int $VariableID, int $StartTime, int $EndTime) { return 0; }
+function AC_FetchChartData(int $InstanceID, int $ObjectID, int $StartTime, int $TimeSpan, int $Density) { return Array(); }
 function AC_GetAggregatedValues(int $InstanceID, int $VariableID, int $AggregationSpan, int $StartTime, int $EndTime, int $Limit) { return Array(); }
 function AC_GetAggregationType(int $InstanceID, int $VariableID) { return 0; }
 function AC_GetAggregationVariables(int $InstanceID, bool $CalculateStatistics) { return Array(); }
@@ -188,15 +233,19 @@ function AC_GetGraphStatus(int $InstanceID, int $VariableID) { return true; }
 function AC_GetLoggedValues(int $InstanceID, int $VariableID, int $StartTime, int $EndTime, int $Limit) { return Array(); }
 function AC_GetLoggingStatus(int $InstanceID, int $VariableID) { return true; }
 function AC_ReAggregateVariable(int $InstanceID, int $VariableID) { return true; }
+function AC_RenderChart(int $InstanceID, int $ObjectID, int $StartTime, int $TimeSpan, int $Density, bool $IsExtrema, bool $IsDyn, int $Width, int $Height) { return ''; }
 function AC_SetAggregationType(int $InstanceID, int $VariableID, int $AggregationType) { return true; }
 function AC_SetGraphStatus(int $InstanceID, int $VariableID, bool $Active) { return true; }
 function AC_SetLoggingStatus(int $InstanceID, int $VariableID, bool $Active) { return true; }
 function ALL_ReadConfiguration(int $InstanceID) { return true; }
+function ALL_SetAnalog(int $InstanceID, int $ChannelID, float $Value) { return true; }
 function ALL_SwitchActor(int $InstanceID, int $ChannelID, bool $DeviceOn) { return true; }
 function ALL_SwitchMode(int $InstanceID, bool $DeviceOn) { return true; }
 function ALL_UpdateValues(int $InstanceID) { return true; }
 function CC_ActivateServer(int $InstanceID) { return true; }
+function CC_GetQRCodeSVG(int $InstanceID, int $WebFrontConfiguratorID) { return ''; }
 function CC_GetURL(int $InstanceID) { return ''; }
+function CC_MakeRequest(int $InstanceID, string $Endpoint, string $RequestData) { return ''; }
 function CMI_UpdateValues(int $InstanceID) { return true; }
 function CSCK_SendText(int $InstanceID, string $Text) { return true; }
 function Cutter_ClearBuffer(int $InstanceID) { return true; }
@@ -220,11 +269,11 @@ function DS_SaveScene(int $InstanceID, int $SceneID) { return true; }
 function DS_ShutterMove(int $InstanceID, int $Position) { return true; }
 function DS_ShutterMoveDown(int $InstanceID) { return true; }
 function DS_ShutterMoveUp(int $InstanceID) { return true; }
+function DS_ShutterStepDown(int $InstanceID) { return true; }
+function DS_ShutterStepUp(int $InstanceID) { return true; }
 function DS_ShutterStop(int $InstanceID) { return true; }
 function DS_SwitchMode(int $InstanceID, bool $DeviceOn) { return true; }
 function DS_UndoScene(int $InstanceID, int $SceneID) { return true; }
-function EC_GetScheduleInfo(int $InstanceID) { return Array(); }
-function EC_getDeviceDescriptions(int $InstanceID) { return ''; }
 function EIB_Char(int $InstanceID, string $Value) { return true; }
 function EIB_Counter16bit(int $InstanceID, int $Value) { return true; }
 function EIB_Counter32bit(int $InstanceID, int $Value) { return true; }
@@ -272,6 +321,7 @@ function ENO_SetIntensity(int $InstanceID, bool $DeviceOn, int $Intensity) { ret
 function ENO_SetLockFanStage(int $InstanceID, bool $Locked) { return true; }
 function ENO_SetLockRoomOccupancy(int $InstanceID, bool $Locked) { return true; }
 function ENO_SetMode(int $InstanceID, int $Mode) { return true; }
+function ENO_SetOverride(int $InstanceID, int $Override) { return true; }
 function ENO_SetPosition(int $InstanceID, int $Position) { return true; }
 function ENO_SetRoomOccupancy(int $InstanceID, bool $Occupied) { return true; }
 function ENO_SetTemperature(int $InstanceID, float $Temperature) { return true; }
@@ -319,6 +369,7 @@ function HM_WriteValueFloat(int $InstanceID, string $Parameter, float $Value) { 
 function HM_WriteValueInteger(int $InstanceID, string $Parameter, int $Value) { return true; }
 function HM_WriteValueString(int $InstanceID, string $Parameter, string $Value) { return true; }
 function IG_UpdateImage(int $InstanceID) { return true; }
+function IMAP_DeleteMail(int $InstanceID, string $UID) { return true; }
 function IMAP_GetCachedMails(int $InstanceID) { return Array(); }
 function IMAP_GetMailEx(int $InstanceID, string $UID) { return Array(); }
 function IMAP_UpdateCache(int $InstanceID) { return true; }
@@ -365,8 +416,8 @@ function IPS_GetEventListByType(int $EventType) { return Array(); }
 function IPS_GetFunction(string $FunctionName) { return Array(); }
 function IPS_GetFunctionList(int $InstanceID) { return Array(); }
 function IPS_GetFunctionListByModuleID(string $ModuleID) { return Array(); }
-function IPS_GetFunctions(array $Parameter) { return Array(); }
-function IPS_GetFunctionsMap(array $Parameter) { return Array(); }
+function IPS_GetFunctions(array $InstanceIDs) { return Array(); }
+function IPS_GetFunctionsMap(array $InstanceIDs) { return Array(); }
 function IPS_GetInstance(int $InstanceID) { return Array(); }
 function IPS_GetInstanceIDByName(string $Name, int $ParentID) { return 0; }
 function IPS_GetInstanceList() { return Array(); }
@@ -375,10 +426,12 @@ function IPS_GetInstanceListByModuleType(int $ModuleType) { return Array(); }
 function IPS_GetKernelDate() { return 0; }
 function IPS_GetKernelDir() { return ''; }
 function IPS_GetKernelDirEx() { return ''; }
+function IPS_GetKernelPlatform() { return ''; }
+function IPS_GetKernelRevision() { return ''; }
 function IPS_GetKernelRunlevel() { return 0; }
 function IPS_GetKernelStartTime() { return 0; }
 function IPS_GetKernelVersion() { return ''; }
-function IPS_GetLibraries(array $Parameter) { return Array(); }
+function IPS_GetLibraries(array $LibraryIDs) { return Array(); }
 function IPS_GetLibrary(string $LibraryID) { return Array(); }
 function IPS_GetLibraryList() { return Array(); }
 function IPS_GetLibraryModules(string $LibraryID) { return Array(); }
@@ -406,13 +459,14 @@ function IPS_GetMediaListByType(int $MediaType) { return Array(); }
 function IPS_GetModule(string $ModuleID) { return Array(); }
 function IPS_GetModuleList() { return Array(); }
 function IPS_GetModuleListByType(int $ModuleType) { return Array(); }
-function IPS_GetModules(array $Parameter) { return Array(); }
+function IPS_GetModules(array $ModuleIDs) { return Array(); }
 function IPS_GetName(int $ID) { return ''; }
 function IPS_GetObject(int $ID) { return Array(); }
 function IPS_GetObjectIDByIdent(string $Ident, int $ParentID) { return 0; }
 function IPS_GetObjectIDByName(string $Name, int $ParentID) { return 0; }
 function IPS_GetObjectList() { return Array(); }
-function IPS_GetOption(string $Option) { return 0; }
+function IPS_GetOption(string $Option) { return ''; }
+function IPS_GetOptionList() { return Array(); }
 function IPS_GetParent(int $ID) { return 0; }
 function IPS_GetProperty(int $InstanceID, string $Name) { return ''; }
 function IPS_GetScript(int $ScriptID) { return Array(); }
@@ -424,14 +478,14 @@ function IPS_GetScriptIDByName(string $Name, int $ParentID) { return 0; }
 function IPS_GetScriptList() { return Array(); }
 function IPS_GetScriptThread(int $ThreadID) { return Array(); }
 function IPS_GetScriptThreadList() { return Array(); }
-function IPS_GetScriptThreads(array $Parameter) { return Array(); }
+function IPS_GetScriptThreads(array $ThreadIDs) { return Array(); }
 function IPS_GetScriptTimer(int $ScriptID) { return 0; }
 function IPS_GetSecurityMode() { return 0; }
 function IPS_GetSnapshot() { return Array(); }
 function IPS_GetSnapshotChanges(int $LastTimestamp) { return Array(); }
 function IPS_GetTimer(int $TimerID) { return Array(); }
 function IPS_GetTimerList() { return Array(); }
-function IPS_GetTimers(array $Parameter) { return Array(); }
+function IPS_GetTimers(array $TimerIDs) { return Array(); }
 function IPS_GetVariable(int $VariableID) { return Array(); }
 function IPS_GetVariableEventList(int $VariableID) { return Array(); }
 function IPS_GetVariableIDByName(string $Name, int $ParentID) { return 0; }
@@ -471,6 +525,10 @@ function IPS_SendMediaEvent(int $MediaID) { return true; }
 function IPS_SetConfiguration(int $InstanceID, string $Configuration) { return true; }
 function IPS_SetDisabled(int $ID, bool $Disabled) { return true; }
 function IPS_SetEventActive(int $EventID, bool $Active) { return true; }
+function IPS_SetEventCondition(int $EventID, int $ConditionID, int $ParentID, int $Operation) { return true; }
+function IPS_SetEventConditionDateRule(int $EventID, int $ConditionID, int $RuleID, int $Comparison, int $Day, int $Month, int $Year) { return true; }
+function IPS_SetEventConditionTimeRule(int $EventID, int $ConditionID, int $RuleID, int $Comparison, int $Hour, int $Minute, int $Second) { return true; }
+function IPS_SetEventConditionVariableRule(int $EventID, int $ConditionID, int $RuleID, int $VariableID, int $Comparison, $Value) { return true; }
 function IPS_SetEventCyclic(int $EventID, int $DateType, int $DateValue, int $DateDay, int $DateDayValue, int $TimeType, int $TimeValue) { return true; }
 function IPS_SetEventCyclicDateFrom(int $EventID, int $Day, int $Month, int $Year) { return true; }
 function IPS_SetEventCyclicDateTo(int $EventID, int $Day, int $Month, int $Year) { return true; }
@@ -494,7 +552,7 @@ function IPS_SetMediaCached(int $MediaID, bool $Cached) { return true; }
 function IPS_SetMediaContent(int $MediaID, string $Content) { return true; }
 function IPS_SetMediaFile(int $MediaID, string $FilePath, bool $FileMustExists) { return true; }
 function IPS_SetName(int $ID, string $Name) { return true; }
-function IPS_SetOption(string $Option, int $Value) { return true; }
+function IPS_SetOption(string $Option, $Value) { return true; }
 function IPS_SetParent(int $ID, int $ParentID) { return true; }
 function IPS_SetPosition(int $ID, int $Position) { return true; }
 function IPS_SetProperty(int $InstanceID, string $Name, $Value) { return true; }
@@ -509,7 +567,7 @@ function IPS_SetVariableProfileDigits(string $ProfileName, int $Digits) { return
 function IPS_SetVariableProfileIcon(string $ProfileName, string $Icon) { return true; }
 function IPS_SetVariableProfileText(string $ProfileName, string $Prefix, string $Suffix) { return true; }
 function IPS_SetVariableProfileValues(string $ProfileName, float $MinValue, float $MaxValue, float $StepSize) { return true; }
-function IPS_Sleep(int $Milliseconds) { return 0; }
+function IPS_Sleep(int $Milliseconds) { return true; }
 function IPS_StartSearch(int $InstanceID) { return true; }
 function IPS_StopSearch(int $InstanceID) { return true; }
 function IPS_SupportsSearching(int $InstanceID) { return true; }
@@ -519,6 +577,77 @@ function IPS_VariableProfileExists(string $ProfileName) { return true; }
 function IRT_ListButtons(int $InstanceID, string $Remote) { return Array(); }
 function IRT_ListRemotes(int $InstanceID) { return Array(); }
 function IRT_SendOnce(int $InstanceID, string $Remote, string $Button) { return true; }
+function KNX_DoWrite(int $InstanceID, $Value) { return true; }
+function KNX_RenameVariables(int $InstanceID) { return true; }
+function KNX_RequestStatus(int $InstanceID) { return true; }
+function KNX_WriteDPT1(int $InstanceID, bool $B) { return true; }
+function KNX_WriteDPT10(int $InstanceID, int $WeekDay, int $TimeOfDay) { return true; }
+function KNX_WriteDPT11(int $InstanceID, int $Date) { return true; }
+function KNX_WriteDPT12(int $InstanceID, int $Value) { return true; }
+function KNX_WriteDPT13(int $InstanceID, float $Value) { return true; }
+function KNX_WriteDPT14(int $InstanceID, float $Value) { return true; }
+function KNX_WriteDPT15(int $InstanceID, int $D1, int $D2, int $D3, int $D4, int $D5, int $D6, bool $E, bool $P, bool $D, bool $C, int $Index) { return true; }
+function KNX_WriteDPT16(int $InstanceID, string $Value) { return true; }
+function KNX_WriteDPT17(int $InstanceID, int $Value) { return true; }
+function KNX_WriteDPT18(int $InstanceID, bool $C, int $SceneNumber) { return true; }
+function KNX_WriteDPT19(int $InstanceID, int $Time, int $WeekDay, bool $F, bool $WD, bool $NWD, bool $NY, bool $ND, bool $NDOW, bool $NT, bool $SUTI, bool $CLQ) { return true; }
+function KNX_WriteDPT2(int $InstanceID, bool $C, bool $V) { return true; }
+function KNX_WriteDPT20(int $InstanceID, int $Value) { return true; }
+function KNX_WriteDPT200(int $InstanceID, int $Z, bool $B) { return true; }
+function KNX_WriteDPT201(int $InstanceID, int $Z, int $N) { return true; }
+function KNX_WriteDPT202(int $InstanceID, int $U, int $Z) { return true; }
+function KNX_WriteDPT203(int $InstanceID, float $U, int $Z) { return true; }
+function KNX_WriteDPT204(int $InstanceID, float $Value, int $Z) { return true; }
+function KNX_WriteDPT205(int $InstanceID, float $Value, int $Z) { return true; }
+function KNX_WriteDPT206(int $InstanceID, int $Time, int $Mode) { return true; }
+function KNX_WriteDPT207(int $InstanceID, int $Value, bool $Attr0, bool $Attr1, bool $Attr2, bool $Attr3, bool $Attr4, bool $Attr5, bool $Attr6, bool $Attr7) { return true; }
+function KNX_WriteDPT209(int $InstanceID, float $Temperature, bool $Attr0, bool $Attr1, bool $Attr2, bool $Attr3, bool $Attr4) { return true; }
+function KNX_WriteDPT21(int $InstanceID, bool $Bit0, bool $Bit1, bool $Bit2, bool $Bit3, bool $Bit4, bool $Bit5, bool $Bit6, bool $Bit7) { return true; }
+function KNX_WriteDPT210(int $InstanceID, float $Temperature, bool $Attr0, bool $Attr1, bool $Attr2, bool $Attr3, bool $Attr4, bool $Attr5, bool $Attr6, bool $Attr7, bool $Attr8, bool $Attr9, bool $Attr10, bool $Attr11) { return true; }
+function KNX_WriteDPT211(int $InstanceID, int $Demand, int $ControllerMode) { return true; }
+function KNX_WriteDPT212(int $InstanceID, float $TempSetpoint1, float $TempSetpoint2, float $TempSetpoint3) { return true; }
+function KNX_WriteDPT213(int $InstanceID, float $TempSetpoint1, float $TempSetpoint2, float $TempSetpoint3, float $TempSetpoint4) { return true; }
+function KNX_WriteDPT214(int $InstanceID, float $Temperature, int $Demand, bool $Attr0, bool $Attr1, bool $Attr2, bool $Attr3, bool $Attr4, bool $Attr5) { return true; }
+function KNX_WriteDPT215(int $InstanceID, float $Temperature, int $Power, bool $Attr0, bool $Attr1, bool $Attr2, bool $Attr3, bool $Attr4, bool $Attr5, bool $Attr6, bool $Attr7, bool $Attr8, bool $Attr9, bool $Attr10, bool $Attr11) { return true; }
+function KNX_WriteDPT216(int $InstanceID, int $Pnom, int $BstageLimit, int $BurnerType, bool $OilSupport, bool $GasSupport, bool $SolidSupport) { return true; }
+function KNX_WriteDPT217(int $InstanceID, int $Magic, int $Version, int $Revision) { return true; }
+function KNX_WriteDPT218(int $InstanceID, float $Volume, int $Z) { return true; }
+function KNX_WriteDPT219(int $InstanceID, int $LogNumber, int $AlarmPriority, int $ApplicationArea, int $ErrorClass, bool $Attribut0, bool $Attribut1, bool $Attribut2, bool $Attribut3, bool $AlarmStatus0, bool $AlarmStatus1, bool $AlarmStatus2) { return true; }
+function KNX_WriteDPT22(int $InstanceID, bool $Bit0, bool $Bit1, bool $Bit2, bool $Bit3, bool $Bit4, bool $Bit5, bool $Bit6, bool $Bit7, bool $Bit8, bool $Bit9, bool $Bit10, bool $Bit11, bool $Bit12, bool $Bit13, bool $Bit14, bool $Bit15) { return true; }
+function KNX_WriteDPT220(int $InstanceID, int $DelayTime, float $Temp) { return true; }
+function KNX_WriteDPT221(int $InstanceID, int $ManufacturerCode, int $IncrementedNumber) { return true; }
+function KNX_WriteDPT222(int $InstanceID, float $Comfort, float $Standby, float $Economy) { return true; }
+function KNX_WriteDPT223(int $InstanceID, int $EnergyDem, int $ControllerMode, int $EmergencyMode) { return true; }
+function KNX_WriteDPT224(int $InstanceID, float $Cooling, float $Heating, int $ControllerMode, int $EmergencyMode) { return true; }
+function KNX_WriteDPT225(int $InstanceID, int $Value0, int $Value1) { return true; }
+function KNX_WriteDPT229(int $InstanceID, int $V, int $Z) { return true; }
+function KNX_WriteDPT23(int $InstanceID, int $Value) { return true; }
+function KNX_WriteDPT230(int $InstanceID, int $ManufactID, int $IdentNumber, int $Version, int $Medium) { return true; }
+function KNX_WriteDPT231(int $InstanceID, string $Language, string $Region) { return true; }
+function KNX_WriteDPT232(int $InstanceID, int $R, int $G, int $B) { return true; }
+function KNX_WriteDPT234(int $InstanceID, string $LanguageCode) { return true; }
+function KNX_WriteDPT235(int $InstanceID, int $ActiveElectricalEnergy, int $Tariff, bool $E, bool $T) { return true; }
+function KNX_WriteDPT236(int $InstanceID, bool $D, int $P, int $M) { return true; }
+function KNX_WriteDPT237(int $InstanceID, bool $CE, bool $BF, bool $LF, bool $RR, bool $AI, int $Addr) { return true; }
+function KNX_WriteDPT238(int $InstanceID, bool $B7, bool $B6, int $Value) { return true; }
+function KNX_WriteDPT239(int $InstanceID, int $SetValue, bool $ChannelActivation) { return true; }
+function KNX_WriteDPT240(int $InstanceID, int $HeightPos, int $SlatsPos, bool $ValidHeightPos, bool $ValidSlatsPos) { return true; }
+function KNX_WriteDPT241(int $InstanceID, int $HeightPos, int $SlatsPos, bool $A, bool $B, bool $C, bool $D, bool $E, bool $F, bool $G, bool $H, bool $I, bool $J, bool $K, bool $L, bool $M, bool $N, bool $O, bool $P) { return true; }
+function KNX_WriteDPT242(int $InstanceID, int $XAxis, int $YAxis, int $Brightness, bool $C, bool $B) { return true; }
+function KNX_WriteDPT25(int $InstanceID, int $Busy, int $Nak) { return true; }
+function KNX_WriteDPT251(int $InstanceID, int $R, int $G, int $B, int $W, bool $ValidR, bool $ValidG, bool $ValidB, bool $ValidW) { return true; }
+function KNX_WriteDPT26(int $InstanceID, int $SceneNumber, bool $B) { return true; }
+function KNX_WriteDPT27(int $InstanceID, bool $S0, bool $S1, bool $S2, bool $S3, bool $S4, bool $S5, bool $S6, bool $S7, bool $S8, bool $S9, bool $S10, bool $S11, bool $S12, bool $S13, bool $S14, bool $S15, bool $M0, bool $M1, bool $M2, bool $M3, bool $M4, bool $M5, bool $M6, bool $M7, bool $M8, bool $M9, bool $M10, bool $M11, bool $M12, bool $M13, bool $M14, bool $M15) { return true; }
+function KNX_WriteDPT29(int $InstanceID, int $Value) { return true; }
+function KNX_WriteDPT3(int $InstanceID, bool $C, int $StepCode) { return true; }
+function KNX_WriteDPT30(int $InstanceID, bool $Bit0, bool $Bit1, bool $Bit2, bool $Bit3, bool $Bit4, bool $Bit5, bool $Bit6, bool $Bit7, bool $Bit8, bool $Bit9, bool $Bit10, bool $Bit11, bool $Bit12, bool $Bit13, bool $Bit14, bool $Bit15, bool $Bit16, bool $Bit17, bool $Bit18, bool $Bit19, bool $Bit20, bool $Bit21, bool $Bit22, bool $Bit23) { return true; }
+function KNX_WriteDPT31(int $InstanceID, int $Value) { return true; }
+function KNX_WriteDPT4(int $InstanceID, string $Value) { return true; }
+function KNX_WriteDPT5(int $InstanceID, int $U) { return true; }
+function KNX_WriteDPT6(int $InstanceID, bool $A, bool $B, bool $C, bool $D, bool $E, int $F) { return true; }
+function KNX_WriteDPT7(int $InstanceID, int $Value) { return true; }
+function KNX_WriteDPT8(int $InstanceID, float $Value) { return true; }
+function KNX_WriteDPT9(int $InstanceID, float $Value) { return true; }
 function LCN_AddGroup(int $InstanceID, int $Group) { return true; }
 function LCN_AddIntensity(int $InstanceID, int $Intensity) { return true; }
 function LCN_Beep(int $InstanceID, bool $SpecialTone, int $Count) { return true; }
@@ -563,6 +692,7 @@ function LCN_SwitchRelayTimer(int $InstanceID, int $Timerfactor) { return true; 
 function MBUS_UpdateValues(int $InstanceID) { return true; }
 function MC_CreateModule(int $InstanceID, string $ModuleURL) { return true; }
 function MC_DeleteModule(int $InstanceID, string $Module) { return true; }
+function MC_GetModule(int $InstanceID, string $Module) { return Array(); }
 function MC_GetModuleList(int $InstanceID) { return Array(); }
 function MC_GetModuleRepositoryInfo(int $InstanceID, string $Module) { return Array(); }
 function MC_GetModuleRepositoryLocalBranchList(int $InstanceID, string $Module) { return Array(); }
@@ -574,6 +704,7 @@ function MC_ReloadModule(int $InstanceID, string $Module) { return true; }
 function MC_RevertModule(int $InstanceID, string $Module) { return true; }
 function MC_UpdateModule(int $InstanceID, string $Module) { return true; }
 function MC_UpdateModuleRepositoryBranch(int $InstanceID, string $Module, string $Branch) { return true; }
+function MSCK_SendPacket(int $InstanceID, string $Text, string $ClientIP, int $ClientPort) { return true; }
 function MSCK_SendText(int $InstanceID, string $Text) { return true; }
 function MXC_DimBrighter(int $InstanceID) { return true; }
 function MXC_DimDarker(int $InstanceID) { return true; }
@@ -598,18 +729,19 @@ function ModBus_RequestRead(int $InstanceID) { return true; }
 function ModBus_WriteCoil(int $InstanceID, bool $Value) { return true; }
 function ModBus_WriteRegister(int $InstanceID, float $Value) { return true; }
 function ModBus_WriteRegisterByte(int $InstanceID, int $Value) { return true; }
+function ModBus_WriteRegisterChar(int $InstanceID, int $Value) { return true; }
 function ModBus_WriteRegisterDWord(int $InstanceID, int $Value) { return true; }
 function ModBus_WriteRegisterInt64(int $InstanceID, float $Value) { return true; }
 function ModBus_WriteRegisterInteger(int $InstanceID, int $Value) { return true; }
 function ModBus_WriteRegisterReal(int $InstanceID, float $Value) { return true; }
 function ModBus_WriteRegisterReal64(int $InstanceID, float $Value) { return true; }
-function ModBus_WriteRegisterShortInt(int $InstanceID, int $Value) { return true; }
-function ModBus_WriteRegisterSmallInt(int $InstanceID, int $Value) { return true; }
+function ModBus_WriteRegisterShort(int $InstanceID, int $Value) { return true; }
 function ModBus_WriteRegisterWord(int $InstanceID, int $Value) { return true; }
 function NC_ActivateServer(int $InstanceID) { return true; }
 function NC_AddDevice(int $InstanceID, string $Token, string $Provider, string $DeviceID, string $Name, int $WebFrontConfiguratorID) { return ''; }
 function NC_GetDevices(int $InstanceID) { return Array(); }
 function NC_PushNotification(int $InstanceID, int $WebFrontConfiguratorID, string $Title, string $Body, string $Sound) { return true; }
+function NC_PushNotificationEx(int $InstanceID, int $WebFrontConfiguratorID, string $Title, string $Body, string $Sound, int $CategoryID, int $TargetID) { return true; }
 function NC_RemoveDevice(int $InstanceID, int $DeviceID) { return true; }
 function NC_RemoveDeviceConfigurator(int $InstanceID, int $DeviceID, int $WebFrontConfiguratorID) { return true; }
 function NC_SetDeviceConfigurator(int $InstanceID, int $DeviceID, int $WebFrontConfiguratorID, bool $Enabled) { return true; }
@@ -626,10 +758,13 @@ function OW_ToggleMode(int $InstanceID) { return true; }
 function OW_WriteBytes(int $InstanceID, string $Data) { return true; }
 function OW_WriteBytesMasked(int $InstanceID, string $Data, int $Mask) { return true; }
 function OZW_GetKnownDevices(int $InstanceID) { return Array(); }
-function OZW_GetKnownItems(int $InstanceID, int $RootID) { return Array(); }
+function OZW_GetKnownItems(int $InstanceID) { return Array(); }
 function OZW_RequestStatus(int $InstanceID) { return true; }
+function OZW_UpdateItems(int $InstanceID) { return true; }
 function OZW_WriteDataPoint(int $InstanceID, $Value) { return true; }
 function OZW_WriteDataPointEx(int $InstanceID, string $DataPoint, $Value) { return true; }
+function PC_Enter(int $InstanceID) { return true; }
+function PC_Leave(int $InstanceID) { return true; }
 function PJ_Backlight(int $InstanceID, bool $Status) { return true; }
 function PJ_Beep(int $InstanceID, int $TenthOfASecond) { return true; }
 function PJ_DimRGBW(int $InstanceID, int $R, int $RTime, int $G, int $GTime, int $B, int $BTime, int $W, int $WTime) { return true; }
@@ -644,6 +779,7 @@ function PJ_SetVoltage(int $InstanceID, float $Voltage) { return true; }
 function PJ_SwitchDuration(int $InstanceID, bool $DeviceOn, int $Duration) { return true; }
 function PJ_SwitchLED(int $InstanceID, int $LED, bool $Status) { return true; }
 function PJ_SwitchMode(int $InstanceID, bool $DeviceOn) { return true; }
+function POP3_DeleteMail(int $InstanceID, string $UID) { return true; }
 function POP3_GetCachedMails(int $InstanceID) { return Array(); }
 function POP3_GetMailEx(int $InstanceID, string $UID) { return Array(); }
 function POP3_UpdateCache(int $InstanceID) { return true; }
@@ -652,17 +788,18 @@ function RegVar_SendEvent(int $InstanceID, int $ReportID, string $Text) { return
 function RegVar_SendPacket(int $InstanceID, string $Text, string $ClientIP, int $ClientPort) { return true; }
 function RegVar_SendText(int $InstanceID, string $Text) { return true; }
 function RegVar_SetBuffer(int $InstanceID, string $Text) { return true; }
-function RequestAction(string $Ident, $Value) { return true; }
-function RequestActionEx(string $Ident, $Value, string $Sender) { return true; }
+function RequestAction(int $VariableID, $Value) { return true; }
+function RequestActionEx(int $VariableID, $Value, string $Sender) { return true; }
 function S7_RequestRead(int $InstanceID) { return true; }
 function S7_Write(int $InstanceID, float $Value) { return true; }
 function S7_WriteBit(int $InstanceID, bool $Value) { return true; }
 function S7_WriteByte(int $InstanceID, int $Value) { return true; }
+function S7_WriteChar(int $InstanceID, int $Value) { return true; }
 function S7_WriteDWord(int $InstanceID, int $Value) { return true; }
 function S7_WriteInteger(int $InstanceID, int $Value) { return true; }
 function S7_WriteReal(int $InstanceID, float $Value) { return true; }
-function S7_WriteShortInt(int $InstanceID, int $Value) { return true; }
-function S7_WriteSmallInt(int $InstanceID, int $Value) { return true; }
+function S7_WriteShort(int $InstanceID, int $Value) { return true; }
+function S7_WriteString(int $InstanceID, string $Value) { return true; }
 function S7_WriteWord(int $InstanceID, int $Value) { return true; }
 function SC_CreateSkin(int $InstanceID, string $SkinURL) { return true; }
 function SC_DeleteSkin(int $InstanceID, string $Skin) { return true; }
@@ -670,11 +807,18 @@ function SC_GetSkin(int $InstanceID, string $Skin) { return Array(); }
 function SC_GetSkinIconContent(int $InstanceID, string $Skin, string $Icon) { return ''; }
 function SC_GetSkinList(int $InstanceID) { return Array(); }
 function SC_GetSkinRepositoryInfo(int $InstanceID, string $Skin) { return Array(); }
+function SC_GetSkinRepositoryLocalBranchList(int $InstanceID, string $Skin) { return Array(); }
+function SC_GetSkinRepositoryRemoteBranchList(int $InstanceID, string $Skin) { return Array(); }
+function SC_IsSkinClean(int $InstanceID, string $Skin) { return true; }
+function SC_IsSkinUpdateAvailable(int $InstanceID, string $Skin) { return true; }
+function SC_IsSkinValid(int $InstanceID, string $Skin) { return true; }
 function SC_Move(int $InstanceID, int $Position) { return true; }
 function SC_MoveDown(int $InstanceID, int $Duration) { return true; }
 function SC_MoveUp(int $InstanceID, int $Duration) { return true; }
+function SC_RevertSkin(int $InstanceID, string $Skin) { return true; }
 function SC_Stop(int $InstanceID) { return true; }
 function SC_UpdateSkin(int $InstanceID, string $Skin) { return true; }
+function SC_UpdateSkinRepositoryBranch(int $InstanceID, string $Skin, string $Branch) { return true; }
 function SMS_RequestBalance(int $InstanceID) { return 0.0; }
 function SMS_RequestStatus(int $InstanceID, string $MsgID) { return ''; }
 function SMS_Send(int $InstanceID, string $Number, string $Text) { return ''; }
@@ -707,16 +851,22 @@ function Sys_GetURLContentEx(string $URL, array $Options) { return ''; }
 function Sys_Ping(string $Host, int $Timeout) { return true; }
 function TTS_GenerateFile(int $InstanceID, string $Text, string $Filename, int $Format) { return true; }
 function TTS_Speak(int $InstanceID, string $Text, bool $Wait) { return true; }
+function UC_DuplicateObject(int $InstanceID, int $ID, int $ParentID, bool $Recursive) { return true; }
 function UC_FindInFiles(int $InstanceID, array $Files, string $SearchStr) { return Array(); }
 function UC_FindInvalidStrings(int $InstanceID) { return Array(); }
 function UC_FindReferences(int $InstanceID, int $ID) { return Array(); }
 function UC_FixInvalidStrings(int $InstanceID, array $References) { return true; }
+function UC_GetIconContent(int $InstanceID, string $Icon) { return ''; }
+function UC_GetIconList(int $InstanceID) { return Array(); }
 function UC_GetLastLogMessages(int $InstanceID, int $Type) { return Array(); }
 function UC_GetLogMessageStatistics(int $InstanceID) { return Array(); }
 function UC_RenameScript(int $InstanceID, int $ScriptID, string $Filename) { return true; }
 function UC_ReplaceInFiles(int $InstanceID, array $Files, string $SearchStr, string $ReplaceStr) { return Array(); }
+function UC_RequestLicenseData(int $InstanceID) { return true; }
 function UC_ResetLastLogMessages(int $InstanceID) { return true; }
 function UC_ResetLogMessageStatistics(int $InstanceID) { return true; }
+function UC_SendUsageData(int $InstanceID) { return true; }
+function USCK_SendPacket(int $InstanceID, string $Text, string $ClientIP, int $ClientPort) { return true; }
 function USCK_SendText(int $InstanceID, string $Text) { return true; }
 function UVR_UpdateValues(int $InstanceID) { return true; }
 function VELLEUSB_ReadAnalogChannel(int $InstanceID, int $Channel) { return 0; }
@@ -731,6 +881,12 @@ function VELLEUSB_WriteDigitalChannel(int $InstanceID, int $Channel, bool $Value
 function VIO_PushText(int $InstanceID, string $Text) { return true; }
 function VIO_PushTextHEX(int $InstanceID, string $Text) { return true; }
 function VIO_SendText(int $InstanceID, string $Text) { return true; }
+function VOIP_Connect(int $InstanceID, string $Number) { return 0; }
+function VOIP_Disconnect(int $InstanceID, int $ConnectionID) { return true; }
+function VOIP_GetConnection(int $InstanceID, int $ConnectionID) { return Array(); }
+function VOIP_GetData(int $InstanceID, int $ConnectionID) { return ''; }
+function VOIP_PlayWave(int $InstanceID, int $ConnectionID, string $Filename) { return true; }
+function VOIP_SetData(int $InstanceID, int $ConnectionID, string $Data) { return true; }
 function WAC_AddFile(int $InstanceID, string $Filename) { return true; }
 function WAC_ClearPlaylist(int $InstanceID) { return true; }
 function WAC_GetPlaylistFile(int $InstanceID, int $Position) { return ''; }
@@ -752,6 +908,7 @@ function WFC_AddItem(int $InstanceID, string $ID, string $ClassName, string $Con
 function WFC_AudioNotification(int $InstanceID, string $Title, int $MediaID) { return true; }
 function WFC_DeleteItem(int $InstanceID, string $ID) { return true; }
 function WFC_Execute(int $InstanceID, int $ActionID, int $TargetID, $Value) { return ''; }
+function WFC_FetchChartData(int $InstanceID, int $ObjectID, int $StartTime, int $TimeSpan, int $Density) { return Array(); }
 function WFC_GetAggregatedValues(int $InstanceID, int $VariableID, int $AggregationSpan, int $StartTime, int $EndTime, int $Limit) { return Array(); }
 function WFC_GetItems(int $InstanceID) { return Array(); }
 function WFC_GetLoggedValues(int $InstanceID, int $VariableID, int $StartTime, int $EndTime, int $Limit) { return Array(); }
@@ -763,7 +920,7 @@ function WFC_OpenCategory(int $InstanceID, int $CategoryID) { return true; }
 function WFC_PushNotification(int $InstanceID, string $Title, string $Text, string $Sound, int $TargetID) { return true; }
 function WFC_RegisterPNS(int $InstanceID, string $Token, string $Provider, string $DeviceID, string $DeviceName) { return ''; }
 function WFC_Reload(int $InstanceID) { return true; }
-function WFC_RenderChart(int $InstanceID, int $ObjectID, int $StartTime, int $TimeSpan, bool $IsHD, bool $IsExtrema, bool $IsDyn, int $Width, int $Height) { return ''; }
+function WFC_RenderChart(int $InstanceID, int $ObjectID, int $StartTime, int $TimeSpan, int $Density, bool $IsExtrema, bool $IsDyn, int $Width, int $Height) { return ''; }
 function WFC_SendNotification(int $InstanceID, string $Title, string $Text, string $Icon, int $Timeout) { return true; }
 function WFC_SendPopup(int $InstanceID, string $Title, string $Text) { return true; }
 function WFC_SetItems(int $InstanceID, string $Items) { return true; }
@@ -789,8 +946,13 @@ function ZW_ConfigurationResetValueEx(int $InstanceID, int $Parameter, int $Size
 function ZW_ConfigurationSetValue(int $InstanceID, int $Parameter, int $Value) { return true; }
 function ZW_ConfigurationSetValueEx(int $InstanceID, int $Parameter, int $Size, int $Value) { return true; }
 function ZW_DeleteFailedDevice(int $InstanceID, int $NodeID) { return true; }
+function ZW_DimDown(int $InstanceID) { return true; }
+function ZW_DimDownEx(int $InstanceID, int $Duration) { return true; }
 function ZW_DimSet(int $InstanceID, int $Intensity) { return true; }
+function ZW_DimSetEx(int $InstanceID, int $Intensity, int $Duration) { return true; }
 function ZW_DimStop(int $InstanceID) { return true; }
+function ZW_DimUp(int $InstanceID) { return true; }
+function ZW_DimUpEx(int $InstanceID, int $Duration) { return true; }
 function ZW_DoorLockOperation(int $InstanceID, int $Mode) { return true; }
 function ZW_GetKnownDevices(int $InstanceID) { return Array(); }
 function ZW_GetUserCodeList(int $InstanceID) { return Array(); }
@@ -845,6 +1007,10 @@ class IPSModule {
     protected function RegisterPropertyInteger(string $Name, int $DefaultValue) { return true; }
     protected function RegisterPropertyFloat(string $Name, float $DefaultValue) { return true; }
     protected function RegisterPropertyString(string $Name, string $DefaultValue) { return true; }
+    protected function RegisterAttributeBoolean(string $Name, bool $DefaultValue) { return true; }
+    protected function RegisterAttributeInteger(string $Name, int $DefaultValue) { return true; }
+    protected function RegisterAttributeFloat(string $Name, float $DefaultValue) { return true; }
+    protected function RegisterAttributeString(string $Name, string $DefaultValue) { return true; }
     protected function RegisterTimer(string $Ident, int $Milliseconds, string $ScriptText) { return 0; }
     protected function SetTimerInterval(string $Ident, int $Milliseconds) { return true; }
     protected function RegisterScript(string $Ident, string $Name, string $Content = '', int $Position = 0) { return 0; }
@@ -863,6 +1029,14 @@ class IPSModule {
     protected function ReadPropertyInteger(string $Name) { return 0; }
     protected function ReadPropertyFloat(string $Name) { return 0.0; }
     protected function ReadPropertyString(string $Name) { return ''; }
+    protected function ReadAttributeBoolean(string $Name) { return true; }
+    protected function ReadAttributeInteger(string $Name) { return 0; }
+    protected function ReadAttributeFloat(string $Name) { return 0.0; }
+    protected function ReadAttributeString(string $Name) { return ''; }
+    protected function WriteAttributeBoolean(string $Name, bool $Value) { return true; }
+    protected function WriteAttributeInteger(string $Name, int $Value) { return true; }
+    protected function WriteAttributeFloat(string $Name, float $Value) { return true; }
+    protected function WriteAttributeString(string $Name, string $Value) { return true; }
     protected function SendDataToParent(string $Data) { return ''; }
     protected function SendDataToChildren(string $Data) { return true; }
     protected function ConnectParent(string $ModuleID) { return true; }
@@ -877,6 +1051,9 @@ class IPSModule {
     protected function RegisterMessage(int $SenderID, int $Message) { return true; }
     protected function UnregisterMessage(int $SenderID, int $Message) { return true; }
     protected function GetMessageList() { return []; }
+    protected function RegisterReference(int $ID) { return true; }
+    protected function UnregisterReference(int $ID) { return true; }
+    protected function GetReferenceList() { return []; }
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data) { return true; }
     public function ApplyChanges() { return true; }
     protected function LogMessage(string $Message, int $Type) { return true; }
