@@ -8,6 +8,8 @@ $_IPS = array (
     'SENDER' => '',
     'VALUE' => 0,
     'OLDVALUE' => 0,
+    'OLDUPDATED' => 0,
+    'OLDCHANGED' => 0,
     'VARIABLE' => 0,
     'EVENT' => 0,
     'TRIGGER' => 0,
@@ -1050,6 +1052,7 @@ class IPSModule {
     protected function RequireParent(string $ModuleID) { return true; }
     protected function ForceParent(string $ModuleID) { return true; }
     protected function SetStatus(int $Status) { return true; }
+    protected function GetStatus() { return 0; }
     protected function SetSummary(string $Summary) { return true; }
     protected function SetBuffer(string $Name, string $Data) { return true; }
     protected function GetBuffer(string $Name) { return ''; }
@@ -1061,6 +1064,7 @@ class IPSModule {
     protected function RegisterReference(int $ID) { return true; }
     protected function UnregisterReference(int $ID) { return true; }
     protected function GetReferenceList() { return []; }
+    protected function HasActiveParent() { return true; }
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data) { return true; }
     public function ApplyChanges() { return true; }
     protected function LogMessage(string $Message, int $Type) { return true; }
