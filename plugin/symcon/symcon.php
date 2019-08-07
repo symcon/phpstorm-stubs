@@ -1064,6 +1064,8 @@ class IPSModule {
     protected function RegisterReference(int $ID) { return true; }
     protected function UnregisterReference(int $ID) { return true; }
     protected function GetReferenceList() { return []; }
+    protected function UpdateFormField(string $Name, string $Parameter, $Value) { return true; }
+    protected function ReloadForm() { return true; }
     protected function HasActiveParent() { return true; }
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data) { return true; }
     public function ApplyChanges() { return true; }
