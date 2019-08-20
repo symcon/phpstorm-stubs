@@ -216,8 +216,6 @@ define('IPS_TIMERMESSAGE', 11400);
 define('TM_REGISTER', 11401);
 define('TM_UNREGISTER', 11402);
 define('TM_CHANGEINTERVAL', 11403);
-define('TM_CHANGEPROGRESS', 11404);
-define('TM_MESSAGE', 11405);
 define('IS_SBASE', 100);
 define('IS_CREATING', 101);
 define('IS_ACTIVE', 102);
