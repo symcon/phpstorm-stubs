@@ -1090,7 +1090,9 @@ class IPSModule {
     protected function RegisterAttributeFloat(string $Name, float $DefaultValue) { return true; }
     protected function RegisterAttributeString(string $Name, string $DefaultValue) { return true; }
     protected function RegisterTimer(string $Ident, int $Milliseconds, string $ScriptText) { return 0; }
+    protected function RegisterOnceTimer(string $Ident, string $ScriptText) { return true; }
     protected function SetTimerInterval(string $Ident, int $Milliseconds) { return true; }
+    protected function GetTimerInterval(string $Name) { return 0; }
     protected function RegisterScript(string $Ident, string $Name, string $Content = '', int $Position = 0) { return 0; }
     protected function RegisterVariableBoolean(string $Ident, string $Name, string $Profile = '', int $Position = 0) { return 0; }
     protected function RegisterVariableInteger(string $Ident, string $Name, string $Profile = '', int $Position = 0) { return 0; }
