@@ -250,11 +250,14 @@ function ALL_SwitchActor(int $InstanceID, int $ChannelID, bool $DeviceOn) { retu
 function ALL_SwitchMode(int $InstanceID, bool $DeviceOn) { return true; }
 function ALL_UpdateValues(int $InstanceID) { return true; }
 function CC_ActivateServer(int $InstanceID) { return true; }
-function CC_GetQRCodeSVG(int $InstanceID, int $WebFrontConfiguratorID) { return ''; }
-function CC_GetURL(int $InstanceID) { return ''; }
+function CC_GetConnectURL(int $InstanceID) { return ''; }
+function CC_GetQRCodeSVG(int $InstanceID, int $WebFrontVisualizationID) { return ''; }
+function CC_GetTrafficStatistics(int $InstanceID) { return Array(); }
 function CC_MakeRequest(int $InstanceID, string $Endpoint, string $RequestData) { return ''; }
+function CC_SendGoogleAssistantStateReport(int $InstanceID, string $States) { return true; }
 function CMI_UpdateValues(int $InstanceID) { return true; }
 function CSCK_SendText(int $InstanceID, string $Text) { return true; }
+function CSCK_UpdateFormUseSSL(int $InstanceID, bool $UseSSL) { return true; }
 function Cutter_ClearBuffer(int $InstanceID) { return true; }
 function DMX_FadeChannel(int $InstanceID, int $Channel, int $Value, float $FadingSeconds) { return true; }
 function DMX_FadeChannelDelayed(int $InstanceID, int $Channel, int $Value, float $FadingSeconds, float $DelayedSeconds) { return true; }
@@ -268,6 +271,7 @@ function DMX_SetRGB(int $InstanceID, int $R, int $G, int $B) { return true; }
 function DS_CallScene(int $InstanceID, int $SceneID) { return true; }
 function DS_DimSet(int $InstanceID, int $Intensity) { return true; }
 function DS_GetKnownDevices(int $InstanceID) { return Array(); }
+function DS_MakeRequest(int $InstanceID, string $Request, string $Data) { return ''; }
 function DS_RequestBinaryInputs(int $InstanceID) { return true; }
 function DS_RequestSensorInputs(int $InstanceID) { return true; }
 function DS_RequestStatus(int $InstanceID) { return true; }
@@ -281,6 +285,7 @@ function DS_ShutterStepUp(int $InstanceID) { return true; }
 function DS_ShutterStop(int $InstanceID) { return true; }
 function DS_SwitchMode(int $InstanceID, bool $DeviceOn) { return true; }
 function DS_UndoScene(int $InstanceID, int $SceneID) { return true; }
+function EIB_BladePosition(int $InstanceID, int $Position) { return true; }
 function EIB_Char(int $InstanceID, string $Value) { return true; }
 function EIB_Counter16bit(int $InstanceID, int $Value) { return true; }
 function EIB_Counter32bit(int $InstanceID, int $Value) { return true; }
@@ -293,7 +298,7 @@ function EIB_DriveMove(int $InstanceID, bool $Value) { return true; }
 function EIB_DriveShutterValue(int $InstanceID, int $Value) { return true; }
 function EIB_DriveStep(int $InstanceID, bool $Value) { return true; }
 function EIB_FloatValue(int $InstanceID, float $Value) { return true; }
-function EIB_GetKnownDevices(int $InstanceID) { return Array(); }
+function EIB_GetDecryptedKeyring(int $InstanceID) { return Array(); }
 function EIB_Move(int $InstanceID, int $Command) { return true; }
 function EIB_Position(int $InstanceID, int $Position) { return true; }
 function EIB_PriorityControl(int $InstanceID, int $Value) { return true; }
@@ -301,13 +306,12 @@ function EIB_PriorityPosition(int $InstanceID, bool $Value) { return true; }
 function EIB_RequestInfo(int $InstanceID) { return true; }
 function EIB_RequestStatus(int $InstanceID) { return true; }
 function EIB_Scale(int $InstanceID, int $Value) { return true; }
-function EIB_SearchDevices(int $InstanceID) { return true; }
 function EIB_SetRGB(int $InstanceID, int $R, int $G, int $B) { return true; }
 function EIB_SetRGBW(int $InstanceID, int $R, int $G, int $B, int $W) { return true; }
 function EIB_Str(int $InstanceID, string $Value) { return true; }
 function EIB_Switch(int $InstanceID, bool $Value) { return true; }
 function EIB_Time(int $InstanceID, string $Value) { return true; }
-function EIB_UploadDataPointFile(int $InstanceID, string $Content) { return true; }
+function EIB_UpdateFormExportMode(int $InstanceID, int $ExportMode) { return true; }
 function EIB_Value(int $InstanceID, float $Value) { return true; }
 function ENO_DimSet(int $InstanceID, int $Intensity) { return true; }
 function ENO_RequestStatus(int $InstanceID) { return true; }
@@ -331,6 +335,7 @@ function ENO_SetMode(int $InstanceID, int $Mode) { return true; }
 function ENO_SetOverride(int $InstanceID, int $Override) { return true; }
 function ENO_SetPosition(int $InstanceID, int $Position) { return true; }
 function ENO_SetRoomOccupancy(int $InstanceID, bool $Occupied) { return true; }
+function ENO_SetSmartAckLearn(int $InstanceID, bool $Enabled) { return true; }
 function ENO_SetTemperature(int $InstanceID, float $Temperature) { return true; }
 function ENO_SetTemperature1(int $InstanceID, float $Temperature) { return true; }
 function ENO_ShutterMoveDown(int $InstanceID) { return true; }
@@ -340,9 +345,14 @@ function ENO_ShutterMoveUpEx(int $InstanceID, float $Seconds) { return true; }
 function ENO_ShutterStepDown(int $InstanceID) { return true; }
 function ENO_ShutterStepUp(int $InstanceID) { return true; }
 function ENO_ShutterStop(int $InstanceID) { return true; }
-function ENO_SwitchMode(int $InstanceID, bool $Value) { return true; }
+function ENO_SwitchLockingMode(int $InstanceID, int $Value) { return true; }
+function ENO_SwitchMode(int $InstanceID, bool $DeviceOn) { return true; }
 function ENO_SwitchModeEx(int $InstanceID, bool $DeviceOn, int $SendMode) { return true; }
+function ENO_SwitchRotationAngle(int $InstanceID, int $Value) { return true; }
+function ENO_SwitchShutterAction(int $InstanceID, int $Value) { return true; }
 function ENO_SwitchVacationMode(int $InstanceID, bool $Value) { return true; }
+function ENO_SwitchVerticalPosition(int $InstanceID, int $Value) { return true; }
+function ENO_UpdateFreeDeviceIDInForm(int $InstanceID) { return true; }
 function FHT_RequestData(int $InstanceID) { return true; }
 function FHT_SetDay(int $InstanceID, int $Value) { return true; }
 function FHT_SetHour(int $InstanceID, int $Value) { return true; }
@@ -362,6 +372,7 @@ function GetValue(int $VariableID) { return ''; }
 function GetValueBoolean(int $VariableID) { return true; }
 function GetValueFloat(int $VariableID) { return 0.0; }
 function GetValueFormatted(int $VariableID) { return ''; }
+function GetValueFormattedEx(int $VariableID, $Value) { return ''; }
 function GetValueInteger(int $VariableID) { return 0; }
 function GetValueString(int $VariableID) { return ''; }
 function HC_TargetValue(int $InstanceID, float $Value) { return true; }
@@ -375,6 +386,7 @@ function HM_WriteValueBoolean(int $InstanceID, string $Parameter, bool $Value) {
 function HM_WriteValueFloat(int $InstanceID, string $Parameter, float $Value) { return true; }
 function HM_WriteValueInteger(int $InstanceID, string $Parameter, int $Value) { return true; }
 function HM_WriteValueString(int $InstanceID, string $Parameter, string $Value) { return true; }
+function HasAction(int $VariableID) { return true; }
 function IG_UpdateImage(int $InstanceID) { return true; }
 function IMAP_DeleteMail(int $InstanceID, string $UID) { return true; }
 function IMAP_GetCachedMails(int $InstanceID) { return Array(); }
@@ -389,6 +401,8 @@ function IPS_CreateInstance(string $ModuleID) { return 0; }
 function IPS_CreateLink() { return 0; }
 function IPS_CreateMedia(int $MediaType) { return 0; }
 function IPS_CreateScript(int $ScriptType) { return 0; }
+function IPS_CreateTemporaryMediaStreamToken(int $MediaID, int $ValidForSeconds) { return ''; }
+function IPS_CreateTemporaryToken(int $ValidForSeconds) { return ''; }
 function IPS_CreateVariable(int $VariableType) { return 0; }
 function IPS_CreateVariableProfile(string $ProfileName, int $ProfileType) { return true; }
 function IPS_DeleteCategory(int $CategoryID) { return true; }
@@ -400,12 +414,16 @@ function IPS_DeleteScript(int $ScriptID, bool $DeleteFile) { return true; }
 function IPS_DeleteVariable(int $VariableID) { return true; }
 function IPS_DeleteVariableProfile(string $ProfileName) { return true; }
 function IPS_DisableDebug(int $ID) { return true; }
+function IPS_DisableDebugFile(int $ID) { return true; }
 function IPS_DisconnectInstance(int $InstanceID) { return true; }
 function IPS_EnableDebug(int $ID, int $Duration) { return true; }
+function IPS_EnableDebugFile(int $ID) { return true; }
 function IPS_EventExists(int $EventID) { return true; }
 function IPS_Execute(string $Filename, string $Parameter, bool $ShowWindow, bool $WaitResult) { return ''; }
 function IPS_ExecuteEx(string $Filename, string $Parameter, bool $ShowWindow, bool $WaitResult, int $SessionID) { return ''; }
 function IPS_FunctionExists(string $FunctionName) { return true; }
+function IPS_GetActiveConnections() { return 0; }
+function IPS_GetAvailableUpdates() { return Array(); }
 function IPS_GetCategory(int $CategoryID) { return Array(); }
 function IPS_GetCategoryIDByName(string $Name, int $ParentID) { return 0; }
 function IPS_GetCategoryList() { return Array(); }
@@ -415,6 +433,8 @@ function IPS_GetCompatibleModules(string $ModuleID) { return Array(); }
 function IPS_GetConfiguration(int $InstanceID) { return ''; }
 function IPS_GetConfigurationForParent(int $InstanceID) { return ''; }
 function IPS_GetConfigurationForm(int $InstanceID) { return ''; }
+function IPS_GetConfigurationsFromChildren(array $Parameter) { return Array(); }
+function IPS_GetConnectionList() { return Array(); }
 function IPS_GetDemoExpiration() { return 0; }
 function IPS_GetEvent(int $EventID) { return Array(); }
 function IPS_GetEventIDByName(string $Name, int $ParentID) { return 0; }
@@ -425,6 +445,7 @@ function IPS_GetFunctionList(int $InstanceID) { return Array(); }
 function IPS_GetFunctionListByModuleID(string $ModuleID) { return Array(); }
 function IPS_GetFunctions(array $InstanceIDs) { return Array(); }
 function IPS_GetFunctionsMap(array $InstanceIDs) { return Array(); }
+function IPS_GetIcons(array $Parameter) { return Array(); }
 function IPS_GetInstance(int $InstanceID) { return Array(); }
 function IPS_GetInstanceIDByName(string $Name, int $ParentID) { return 0; }
 function IPS_GetInstanceList() { return Array(); }
@@ -476,6 +497,7 @@ function IPS_GetOption(string $Option) { return ''; }
 function IPS_GetOptionList() { return Array(); }
 function IPS_GetParent(int $ID) { return 0; }
 function IPS_GetProperty(int $InstanceID, string $Name) { return ''; }
+function IPS_GetReferenceList(int $InstanceID) { return Array(); }
 function IPS_GetScript(int $ScriptID) { return Array(); }
 function IPS_GetScriptContent(int $ScriptID) { return ''; }
 function IPS_GetScriptEventList(int $ScriptID) { return Array(); }
@@ -505,11 +527,14 @@ function IPS_HasChildren(int $ID) { return true; }
 function IPS_InstanceExists(int $InstanceID) { return true; }
 function IPS_IsChild(int $ID, int $ParentID, bool $Recursive) { return true; }
 function IPS_IsInstanceCompatible(int $InstanceID, int $ParentInstanceID) { return true; }
+function IPS_IsLicenseChangePending() { return true; }
 function IPS_IsModuleCompatible(string $ModuleID, string $ParentModuleID) { return true; }
+function IPS_IsOptionChangePending() { return true; }
 function IPS_IsSearching(int $InstanceID) { return true; }
 function IPS_LibraryExists(string $LibraryID) { return true; }
 function IPS_LinkExists(int $LinkID) { return true; }
 function IPS_LogMessage(string $Sender, string $Message) { return true; }
+function IPS_MakeCrash() { return true; }
 function IPS_MediaExists(int $MediaID) { return true; }
 function IPS_ModuleExists(string $ModuleID) { return true; }
 function IPS_ObjectExists(int $ID) { return true; }
@@ -534,6 +559,7 @@ function IPS_SetDisabled(int $ID, bool $Disabled) { return true; }
 function IPS_SetEventActive(int $EventID, bool $Active) { return true; }
 function IPS_SetEventCondition(int $EventID, int $ConditionID, int $ParentID, int $Operation) { return true; }
 function IPS_SetEventConditionDateRule(int $EventID, int $ConditionID, int $RuleID, int $Comparison, int $Day, int $Month, int $Year) { return true; }
+function IPS_SetEventConditionDayOfTheWeekRule(int $EventID, int $ConditionID, int $RuleID, int $Comparison, int $Value) { return true; }
 function IPS_SetEventConditionTimeRule(int $EventID, int $ConditionID, int $RuleID, int $Comparison, int $Hour, int $Minute, int $Second) { return true; }
 function IPS_SetEventConditionVariableRule(int $EventID, int $ConditionID, int $RuleID, int $VariableID, int $Comparison, $Value) { return true; }
 function IPS_SetEventCyclic(int $EventID, int $DateType, int $DateValue, int $DateDay, int $DateDayValue, int $TimeType, int $TimeValue) { return true; }
@@ -579,11 +605,14 @@ function IPS_StartSearch(int $InstanceID) { return true; }
 function IPS_StopSearch(int $InstanceID) { return true; }
 function IPS_SupportsSearching(int $InstanceID) { return true; }
 function IPS_TimerExists(int $TimerID) { return true; }
+function IPS_Translate(int $InstanceID, string $Text) { return ''; }
 function IPS_VariableExists(int $VariableID) { return true; }
 function IPS_VariableProfileExists(string $ProfileName) { return true; }
 function IRT_ListButtons(int $InstanceID, string $Remote) { return Array(); }
 function IRT_ListRemotes(int $InstanceID) { return Array(); }
 function IRT_SendOnce(int $InstanceID, string $Remote, string $Button) { return true; }
+function IRT_UpdateFormButtons(int $InstanceID, string $Remote) { return true; }
+function IRT_UpdateFormRemotes(int $InstanceID) { return true; }
 function KNX_DoWrite(int $InstanceID, $Value) { return true; }
 function KNX_RenameVariables(int $InstanceID) { return true; }
 function KNX_RequestStatus(int $InstanceID) { return true; }
@@ -591,7 +620,7 @@ function KNX_WriteDPT1(int $InstanceID, bool $B) { return true; }
 function KNX_WriteDPT10(int $InstanceID, int $WeekDay, int $TimeOfDay) { return true; }
 function KNX_WriteDPT11(int $InstanceID, int $Date) { return true; }
 function KNX_WriteDPT12(int $InstanceID, int $Value) { return true; }
-function KNX_WriteDPT13(int $InstanceID, float $Value) { return true; }
+function KNX_WriteDPT13(int $InstanceID, int $Value) { return true; }
 function KNX_WriteDPT14(int $InstanceID, float $Value) { return true; }
 function KNX_WriteDPT15(int $InstanceID, int $D1, int $D2, int $D3, int $D4, int $D5, int $D6, bool $E, bool $P, bool $D, bool $C, int $Index) { return true; }
 function KNX_WriteDPT16(int $InstanceID, string $Value) { return true; }
@@ -641,6 +670,7 @@ function KNX_WriteDPT239(int $InstanceID, int $SetValue, bool $ChannelActivation
 function KNX_WriteDPT240(int $InstanceID, int $HeightPos, int $SlatsPos, bool $ValidHeightPos, bool $ValidSlatsPos) { return true; }
 function KNX_WriteDPT241(int $InstanceID, int $HeightPos, int $SlatsPos, bool $A, bool $B, bool $C, bool $D, bool $E, bool $F, bool $G, bool $H, bool $I, bool $J, bool $K, bool $L, bool $M, bool $N, bool $O, bool $P) { return true; }
 function KNX_WriteDPT242(int $InstanceID, int $XAxis, int $YAxis, int $Brightness, bool $C, bool $B) { return true; }
+function KNX_WriteDPT249(int $InstanceID, int $TimePeriod, int $AbsoluteColourTemperature, int $AbsoluteBrightness, bool $B0, bool $B1, bool $B2) { return true; }
 function KNX_WriteDPT25(int $InstanceID, int $Busy, int $Nak) { return true; }
 function KNX_WriteDPT251(int $InstanceID, int $R, int $G, int $B, int $W, bool $ValidR, bool $ValidG, bool $ValidB, bool $ValidW) { return true; }
 function KNX_WriteDPT26(int $InstanceID, int $SceneNumber, bool $B) { return true; }
@@ -657,8 +687,12 @@ function KNX_WriteDPT8(int $InstanceID, float $Value) { return true; }
 function KNX_WriteDPT9(int $InstanceID, float $Value) { return true; }
 function LCN_AddGroup(int $InstanceID, int $Group) { return true; }
 function LCN_AddIntensity(int $InstanceID, int $Intensity) { return true; }
+function LCN_AddThresholdCurrent(int $InstanceID, int $Register, int $Threshold, float $Value) { return true; }
+function LCN_AddThresholdDefined(int $InstanceID, int $Register, int $Threshold, float $Value) { return true; }
 function LCN_Beep(int $InstanceID, bool $SpecialTone, int $Count) { return true; }
 function LCN_DeductIntensity(int $InstanceID, int $Intensity) { return true; }
+function LCN_DeductThresholdCurrent(int $InstanceID, int $Register, int $Threshold, float $Value) { return true; }
+function LCN_DeductThresholdDefined(int $InstanceID, int $Register, int $Threshold, float $Value) { return true; }
 function LCN_Fadeout(int $InstanceID, int $Intensity, int $Ramp) { return true; }
 function LCN_FlipRelay(int $InstanceID) { return true; }
 function LCN_GetKnownDevices(int $InstanceID) { return Array(); }
@@ -677,7 +711,7 @@ function LCN_SearchDevices(int $InstanceID, int $Segment) { return true; }
 function LCN_SelectSceneRegister(int $InstanceID, int $Register) { return true; }
 function LCN_SendCommand(int $InstanceID, string $Function, string $Data) { return true; }
 function LCN_SetDisplayText(int $InstanceID, int $Row, string $Text) { return true; }
-function LCN_SetDisplayTime(int $InstanceID, int $Row, int $Seconds) { return true; }
+function LCN_SetDisplayTime(int $InstanceID, int $Row, int $Duration) { return true; }
 function LCN_SetIntensity(int $InstanceID, int $Intensity, int $Ramp) { return true; }
 function LCN_SetLamp(int $InstanceID, int $Lamp, string $Action) { return true; }
 function LCN_SetRGBW(int $InstanceID, int $R, int $G, int $B, int $W) { return true; }
@@ -696,6 +730,8 @@ function LCN_SwitchMemory(int $InstanceID, int $Ramp) { return true; }
 function LCN_SwitchMode(int $InstanceID, int $Ramp) { return true; }
 function LCN_SwitchRelay(int $InstanceID, bool $SwitchOn) { return true; }
 function LCN_SwitchRelayTimer(int $InstanceID, int $Timerfactor) { return true; }
+function MBUS_SearchDevices(int $InstanceID) { return true; }
+function MBUS_UpdateFormAddressing(int $InstanceID, bool $UseSecondaryAddress) { return true; }
 function MBUS_UpdateValues(int $InstanceID) { return true; }
 function MC_CreateModule(int $InstanceID, string $ModuleURL) { return true; }
 function MC_DeleteModule(int $InstanceID, string $Module) { return true; }
@@ -711,6 +747,7 @@ function MC_ReloadModule(int $InstanceID, string $Module) { return true; }
 function MC_RevertModule(int $InstanceID, string $Module) { return true; }
 function MC_UpdateModule(int $InstanceID, string $Module) { return true; }
 function MC_UpdateModuleRepositoryBranch(int $InstanceID, string $Module, string $Branch) { return true; }
+function MQTT_GetKnownDevices(int $InstanceID) { return Array(); }
 function MSCK_SendPacket(int $InstanceID, string $Text, string $ClientIP, int $ClientPort) { return true; }
 function MSCK_SendText(int $InstanceID, string $Text) { return true; }
 function MXC_DimBrighter(int $InstanceID) { return true; }
@@ -720,7 +757,6 @@ function MXC_DimStop(int $InstanceID) { return true; }
 function MXC_GetKnownDevices(int $InstanceID) { return Array(); }
 function MXC_RequestInfo(int $InstanceID) { return true; }
 function MXC_RequestStatus(int $InstanceID) { return true; }
-function MXC_SearchDevices(int $InstanceID) { return true; }
 function MXC_SendBoolean(int $InstanceID, bool $Value) { return true; }
 function MXC_SendFloat(int $InstanceID, float $Value) { return true; }
 function MXC_SendInteger(int $InstanceID, int $Value) { return true; }
@@ -731,7 +767,6 @@ function MXC_ShutterStepDown(int $InstanceID) { return true; }
 function MXC_ShutterStepUp(int $InstanceID) { return true; }
 function MXC_ShutterStop(int $InstanceID) { return true; }
 function MXC_SwitchMode(int $InstanceID, bool $DeviceOn) { return true; }
-function MXC_UploadDataPointFile(int $InstanceID, string $Content) { return true; }
 function ModBus_RequestRead(int $InstanceID) { return true; }
 function ModBus_WriteCoil(int $InstanceID, bool $Value) { return true; }
 function ModBus_WriteRegister(int $InstanceID, float $Value) { return true; }
@@ -745,15 +780,16 @@ function ModBus_WriteRegisterReal64(int $InstanceID, float $Value) { return true
 function ModBus_WriteRegisterShort(int $InstanceID, int $Value) { return true; }
 function ModBus_WriteRegisterWord(int $InstanceID, int $Value) { return true; }
 function NC_ActivateServer(int $InstanceID) { return true; }
-function NC_AddDevice(int $InstanceID, string $Token, string $Provider, string $DeviceID, string $Name, int $WebFrontConfiguratorID) { return ''; }
+function NC_AddDevice(int $InstanceID, string $Token, string $Provider, string $DeviceID, string $Name, int $WebFrontVisualizationID) { return ''; }
 function NC_GetDevices(int $InstanceID) { return Array(); }
-function NC_PushNotification(int $InstanceID, int $WebFrontConfiguratorID, string $Title, string $Body, string $Sound) { return true; }
-function NC_PushNotificationEx(int $InstanceID, int $WebFrontConfiguratorID, string $Title, string $Body, string $Sound, int $CategoryID, int $TargetID) { return true; }
+function NC_PushNotification(int $InstanceID, int $WebFrontVisualizationID, string $Title, string $Body, string $Sound) { return true; }
+function NC_PushNotificationEx(int $InstanceID, int $WebFrontVisualizationID, string $Title, string $Body, string $Sound, int $CategoryID, int $TargetID) { return true; }
 function NC_RemoveDevice(int $InstanceID, int $DeviceID) { return true; }
-function NC_RemoveDeviceConfigurator(int $InstanceID, int $DeviceID, int $WebFrontConfiguratorID) { return true; }
-function NC_SetDeviceConfigurator(int $InstanceID, int $DeviceID, int $WebFrontConfiguratorID, bool $Enabled) { return true; }
+function NC_RemoveDeviceConfigurator(int $InstanceID, int $DeviceID, int $WebFrontVisualizationID) { return true; }
+function NC_SetDeviceConfigurator(int $InstanceID, int $DeviceID, int $WebFrontVisualizationID, bool $Enabled) { return true; }
 function NC_SetDeviceName(int $InstanceID, int $DeviceID, string $Name) { return true; }
 function NC_TestDevice(int $InstanceID, int $DeviceID) { return true; }
+function OC_PushMessage(int $InstanceID, string $ClientID, string $Data) { return true; }
 function OW_GetKnownDevices(int $InstanceID) { return Array(); }
 function OW_RequestStatus(int $InstanceID) { return true; }
 function OW_SetPin(int $InstanceID, int $Pin, bool $SwitchOn) { return true; }
@@ -809,20 +845,26 @@ function S7_WriteShort(int $InstanceID, int $Value) { return true; }
 function S7_WriteString(int $InstanceID, string $Value) { return true; }
 function S7_WriteWord(int $InstanceID, int $Value) { return true; }
 function SC_CreateSkin(int $InstanceID, string $SkinURL) { return true; }
+function SC_DeleteModule(int $InstanceID, string $BundleID) { return true; }
 function SC_DeleteSkin(int $InstanceID, string $Skin) { return true; }
+function SC_GetLastConfirmedStoreConditions(int $InstanceID) { return 0; }
+function SC_GetModuleInfoList(int $InstanceID) { return Array(); }
 function SC_GetSkin(int $InstanceID, string $Skin) { return Array(); }
 function SC_GetSkinIconContent(int $InstanceID, string $Skin, string $Icon) { return ''; }
 function SC_GetSkinList(int $InstanceID) { return Array(); }
 function SC_GetSkinRepositoryInfo(int $InstanceID, string $Skin) { return Array(); }
 function SC_GetSkinRepositoryLocalBranchList(int $InstanceID, string $Skin) { return Array(); }
 function SC_GetSkinRepositoryRemoteBranchList(int $InstanceID, string $Skin) { return Array(); }
+function SC_InstallModule(int $InstanceID, string $BundleID, int $Channel, int $ReleaseID) { return true; }
 function SC_IsSkinClean(int $InstanceID, string $Skin) { return true; }
 function SC_IsSkinUpdateAvailable(int $InstanceID, string $Skin) { return true; }
 function SC_IsSkinValid(int $InstanceID, string $Skin) { return true; }
+function SC_MakeRequest(int $InstanceID, string $Endpoint, string $Method, string $Body) { return ''; }
 function SC_Move(int $InstanceID, int $Position) { return true; }
 function SC_MoveDown(int $InstanceID, int $Duration) { return true; }
 function SC_MoveUp(int $InstanceID, int $Duration) { return true; }
 function SC_RevertSkin(int $InstanceID, string $Skin) { return true; }
+function SC_SetLastConfirmedStoreConditions(int $InstanceID, int $LastConfirmedStoreConditions) { return true; }
 function SC_Stop(int $InstanceID) { return true; }
 function SC_UpdateSkin(int $InstanceID, string $Skin) { return true; }
 function SC_UpdateSkinRepositoryBranch(int $InstanceID, string $Skin, string $Branch) { return true; }
@@ -841,6 +883,7 @@ function SPRT_SetDTR(int $InstanceID, bool $OnOff) { return true; }
 function SPRT_SetRTS(int $InstanceID, bool $OnOff) { return true; }
 function SSCK_SendPacket(int $InstanceID, string $Text, string $ClientIP, int $ClientPort) { return true; }
 function SSCK_SendText(int $InstanceID, string $Text) { return true; }
+function SSCK_UpdateFormUseSSL(int $InstanceID, bool $UseSSL) { return true; }
 function SetValue(int $VariableID, $Value) { return true; }
 function SetValueBoolean(int $VariableID, bool $Value) { return true; }
 function SetValueFloat(int $VariableID, float $Value) { return true; }
@@ -856,22 +899,28 @@ function Sys_GetSpooler() { return Array(); }
 function Sys_GetURLContent(string $URL) { return ''; }
 function Sys_GetURLContentEx(string $URL, array $Options) { return ''; }
 function Sys_Ping(string $Host, int $Timeout) { return true; }
-function TTS_GenerateFile(int $InstanceID, string $Text, string $Filename, int $Format) { return true; }
-function TTS_Speak(int $InstanceID, string $Text, bool $Wait) { return true; }
-function UC_DuplicateObject(int $InstanceID, int $ID, int $ParentID, bool $Recursive) { return true; }
+function UC_DeleteCrashReports(int $InstanceID) { return true; }
+function UC_DuplicateObject(int $InstanceID, int $ID, int $ParentID, bool $Recursive) { return 0; }
 function UC_FindInFiles(int $InstanceID, array $Files, string $SearchStr) { return Array(); }
 function UC_FindInvalidStrings(int $InstanceID) { return Array(); }
 function UC_FindReferences(int $InstanceID, int $ID) { return Array(); }
+function UC_FindShortTags(int $InstanceID) { return Array(); }
 function UC_FixInvalidStrings(int $InstanceID, array $References) { return true; }
+function UC_FixShortTags(int $InstanceID, array $References) { return true; }
+function UC_GetCrashReportCount(int $InstanceID) { return 0; }
+function UC_GetEventStatistics(int $InstanceID) { return Array(); }
 function UC_GetIconContent(int $InstanceID, string $Icon) { return ''; }
 function UC_GetIconList(int $InstanceID) { return Array(); }
+function UC_GetKernelStatistics(int $InstanceID) { return Array(); }
 function UC_GetLastLogMessages(int $InstanceID, int $Type) { return Array(); }
 function UC_GetLogMessageStatistics(int $InstanceID) { return Array(); }
+function UC_GetScriptSenderList(int $InstanceID) { return Array(); }
 function UC_RenameScript(int $InstanceID, int $ScriptID, string $Filename) { return true; }
 function UC_ReplaceInFiles(int $InstanceID, array $Files, string $SearchStr, string $ReplaceStr) { return Array(); }
 function UC_RequestLicenseData(int $InstanceID) { return true; }
 function UC_ResetLastLogMessages(int $InstanceID) { return true; }
 function UC_ResetLogMessageStatistics(int $InstanceID) { return true; }
+function UC_SendCrashReports(int $InstanceID, string $FeedbackMail, string $Message) { return true; }
 function UC_SendUsageData(int $InstanceID) { return true; }
 function USCK_SendPacket(int $InstanceID, string $Text, string $ClientIP, int $ClientPort) { return true; }
 function USCK_SendText(int $InstanceID, string $Text) { return true; }
@@ -885,32 +934,28 @@ function VELLEUSB_SetCounterDebounceTime(int $InstanceID, int $Counter, int $Tim
 function VELLEUSB_WriteAnalogChannel(int $InstanceID, int $Channel, int $Value) { return true; }
 function VELLEUSB_WriteDigital(int $InstanceID, int $Value) { return true; }
 function VELLEUSB_WriteDigitalChannel(int $InstanceID, int $Channel, bool $Value) { return true; }
+function VIO_Connect(int $InstanceID, string $ClientIP, int $ClientPort) { return true; }
+function VIO_Disconnect(int $InstanceID, string $ClientIP, int $ClientPort) { return true; }
+function VIO_GetPacketList(int $InstanceID) { return Array(); }
+function VIO_GetTextList(int $InstanceID) { return Array(); }
+function VIO_PushPacket(int $InstanceID, string $Text, string $ClientIP, int $ClientPort) { return true; }
+function VIO_PushPacketHEX(int $InstanceID, string $Text, string $ClientIP, int $ClientPort) { return true; }
 function VIO_PushText(int $InstanceID, string $Text) { return true; }
 function VIO_PushTextHEX(int $InstanceID, string $Text) { return true; }
+function VIO_SendPacket(int $InstanceID, string $Text, string $ClientIP, int $ClientPort) { return true; }
 function VIO_SendText(int $InstanceID, string $Text) { return true; }
-function VOIP_Connect(int $InstanceID, string $Number) { return 0; }
-function VOIP_Disconnect(int $InstanceID, int $ConnectionID) { return true; }
-function VOIP_GetConnection(int $InstanceID, int $ConnectionID) { return Array(); }
-function VOIP_GetData(int $InstanceID, int $ConnectionID) { return ''; }
-function VOIP_PlayWave(int $InstanceID, int $ConnectionID, string $Filename) { return true; }
-function VOIP_SetData(int $InstanceID, int $ConnectionID, string $Data) { return true; }
-function WAC_AddFile(int $InstanceID, string $Filename) { return true; }
-function WAC_ClearPlaylist(int $InstanceID) { return true; }
-function WAC_GetPlaylistFile(int $InstanceID, int $Position) { return ''; }
-function WAC_GetPlaylistLength(int $InstanceID) { return 0; }
-function WAC_GetPlaylistPosition(int $InstanceID) { return 0; }
-function WAC_GetPlaylistTitle(int $InstanceID, int $Position) { return ''; }
-function WAC_Next(int $InstanceID) { return true; }
-function WAC_Pause(int $InstanceID) { return true; }
-function WAC_Play(int $InstanceID) { return true; }
-function WAC_PlayFile(int $InstanceID, string $Filename) { return true; }
-function WAC_Prev(int $InstanceID) { return true; }
-function WAC_SetPlaylistPosition(int $InstanceID, int $Position) { return true; }
-function WAC_SetPosition(int $InstanceID, int $Seconds) { return true; }
-function WAC_SetRepeat(int $InstanceID, bool $DoRepeat) { return true; }
-function WAC_SetShuffle(int $InstanceID, bool $DoShuffle) { return true; }
-function WAC_SetVolume(int $InstanceID, int $Volume) { return true; }
-function WAC_Stop(int $InstanceID) { return true; }
+function VoIP_AcceptCall(int $InstanceID, int $ConnectionID) { return true; }
+function VoIP_Connect(int $InstanceID, string $Number) { return 0; }
+function VoIP_Disconnect(int $InstanceID, int $ConnectionID) { return true; }
+function VoIP_GetConnection(int $InstanceID, int $ConnectionID) { return Array(); }
+function VoIP_GetData(int $InstanceID, int $ConnectionID) { return ''; }
+function VoIP_PlayWave(int $InstanceID, int $ConnectionID, string $Filename) { return true; }
+function VoIP_RejectCall(int $InstanceID, int $ConnectionID) { return true; }
+function VoIP_SendDTMF(int $InstanceID, int $ConnectionID, string $Digit) { return true; }
+function VoIP_SetData(int $InstanceID, int $ConnectionID, string $Data) { return true; }
+function WC_PushMessage(int $InstanceID, string $Hook, string $Data) { return true; }
+function WC_PushMessageEx(int $InstanceID, string $Hook, string $Data, string $RemoteIP, int $RemotePort) { return true; }
+function WEB_UpdateFormEnableSSL(int $InstanceID, bool $EnableSSL) { return true; }
 function WFC_AddItem(int $InstanceID, string $ID, string $ClassName, string $Configuration, string $ParentID) { return true; }
 function WFC_AudioNotification(int $InstanceID, string $Title, int $MediaID) { return true; }
 function WFC_DeleteItem(int $InstanceID, string $ID) { return true; }
@@ -933,9 +978,12 @@ function WFC_SendPopup(int $InstanceID, string $Title, string $Text) { return tr
 function WFC_SetItems(int $InstanceID, string $Items) { return true; }
 function WFC_SwitchPage(int $InstanceID, string $PageName) { return true; }
 function WFC_UpdateConfiguration(int $InstanceID, string $ID, string $Configuration) { return true; }
+function WFC_UpdateFormGraphDefaults(int $InstanceID, bool $GraphRawDensity) { return true; }
+function WFC_UpdateFormNotificationValues(int $InstanceID) { return true; }
 function WFC_UpdateParentID(int $InstanceID, string $ID, string $ParentID) { return true; }
 function WFC_UpdatePosition(int $InstanceID, string $ID, int $Position) { return true; }
 function WFC_UpdateVisibility(int $InstanceID, string $ID, bool $Visible) { return true; }
+function WSC_SendMessage(int $InstanceID, string $Message) { return true; }
 function WWW_UpdatePage(int $InstanceID) { return true; }
 function WinLIRC_SendOnce(int $InstanceID, string $Remote, string $Button) { return true; }
 function WuT_SwitchMode(int $InstanceID, bool $DeviceOn) { return true; }
@@ -943,15 +991,28 @@ function WuT_UpdateValue(int $InstanceID) { return true; }
 function WuT_UpdateValues(int $InstanceID) { return true; }
 function XBee_SendBuffer(int $InstanceID, int $DestinationDevice, string $Buffer) { return true; }
 function XBee_SendCommand(int $InstanceID, string $Command) { return ''; }
+function YC_SearchDevices(int $InstanceID, string $SearchTarget) { return Array(); }
+function ZC_QueryService(int $InstanceID, string $Name, string $Type, string $Domain) { return Array(); }
+function ZC_QueryServiceEx(int $InstanceID, string $Name, string $Type, string $Domain, int $Timeout) { return Array(); }
+function ZC_QueryServiceType(int $InstanceID, string $Type, string $Domain) { return Array(); }
+function ZC_QueryServiceTypeEx(int $InstanceID, string $Type, string $Domain, int $Timeout) { return Array(); }
+function ZC_QueryServiceTypes(int $InstanceID) { return Array(); }
+function ZC_QueryServiceTypesEx(int $InstanceID, int $Timeout) { return Array(); }
 function ZW_AssociationAddToGroup(int $InstanceID, int $Group, int $Node) { return true; }
+function ZW_AssociationAddToGroupEx(int $InstanceID, int $Group, int $Node, int $Channel) { return true; }
 function ZW_AssociationRemoveFromGroup(int $InstanceID, int $Group, int $Node) { return true; }
+function ZW_AssociationRemoveFromGroupEx(int $InstanceID, int $Group, int $Node, int $Channel) { return true; }
 function ZW_Basic(int $InstanceID, int $Value) { return true; }
+function ZW_ClearWakeUpQueue(int $InstanceID) { return true; }
+function ZW_ColorCW(int $InstanceID, int $ColdWhite) { return true; }
+function ZW_ColorRGB(int $InstanceID, int $Red, int $Green, int $Blue) { return true; }
 function ZW_ColorRGBWW(int $InstanceID, int $Red, int $Green, int $Blue, int $WarmWhite, int $ColdWhite) { return true; }
-function ZW_ConfigurationGetValue(int $InstanceID, int $Parameter) { return 0; }
+function ZW_ColorWW(int $InstanceID, int $WarmWhite) { return true; }
+function ZW_ConfigurationAddCustom(int $InstanceID, int $Parameter, string $Description) { return true; }
+function ZW_ConfigurationGetValue(int $InstanceID, int $Parameter) { return true; }
+function ZW_ConfigurationRemoveCustom(int $InstanceID, int $Parameter) { return true; }
 function ZW_ConfigurationResetValue(int $InstanceID, int $Parameter) { return true; }
-function ZW_ConfigurationResetValueEx(int $InstanceID, int $Parameter, int $Size) { return true; }
 function ZW_ConfigurationSetValue(int $InstanceID, int $Parameter, int $Value) { return true; }
-function ZW_ConfigurationSetValueEx(int $InstanceID, int $Parameter, int $Size, int $Value) { return true; }
 function ZW_DeleteFailedDevice(int $InstanceID, int $NodeID) { return true; }
 function ZW_DimDown(int $InstanceID) { return true; }
 function ZW_DimDownEx(int $InstanceID, int $Duration) { return true; }
@@ -961,25 +1022,21 @@ function ZW_DimStop(int $InstanceID) { return true; }
 function ZW_DimUp(int $InstanceID) { return true; }
 function ZW_DimUpEx(int $InstanceID, int $Duration) { return true; }
 function ZW_DoorLockOperation(int $InstanceID, int $Mode) { return true; }
+function ZW_GetInformation(int $InstanceID) { return ''; }
 function ZW_GetKnownDevices(int $InstanceID) { return Array(); }
-function ZW_GetUserCodeList(int $InstanceID) { return Array(); }
+function ZW_GetSupportedVersions(int $InstanceID) { return Array(); }
 function ZW_GetWakeUpQueue(int $InstanceID) { return Array(); }
 function ZW_LockMode(int $InstanceID, bool $Locked) { return true; }
 function ZW_MeterReset(int $InstanceID) { return true; }
 function ZW_Optimize(int $InstanceID) { return true; }
 function ZW_ProtectionSet(int $InstanceID, int $Mode) { return true; }
-function ZW_PulseThermostatFanModeSet(int $InstanceID, int $FanMode) { return true; }
-function ZW_PulseThermostatModeSet(int $InstanceID, int $Mode) { return true; }
-function ZW_PulseThermostatPowerModeSet(int $InstanceID, int $PowerMode) { return true; }
-function ZW_PulseThermostatSetPointSet(int $InstanceID, int $SetPoint, float $Value) { return true; }
-function ZW_RequestAssociations(int $InstanceID) { return Array(); }
+function ZW_ProtectionSetEx(int $InstanceID, int $Mode, int $ModeRF) { return true; }
+function ZW_ReactivateFailedNode(int $InstanceID) { return true; }
 function ZW_RequestInfo(int $InstanceID) { return true; }
-function ZW_RequestRoutingList(int $InstanceID) { return Array(); }
+function ZW_RequestRoutingList(int $InstanceID, bool $RemoveBad, bool $RemoveNonRepeaters) { return Array(); }
 function ZW_RequestStatus(int $InstanceID) { return true; }
-function ZW_RequestVersion(int $InstanceID) { return Array(); }
-function ZW_RequestWakeUpInterval(int $InstanceID) { return Array(); }
+function ZW_ResetStatistics(int $InstanceID) { return true; }
 function ZW_ResetToDefault(int $InstanceID) { return true; }
-function ZW_SearchDevices(int $InstanceID) { return true; }
 function ZW_SearchMainDevice(int $InstanceID) { return 0; }
 function ZW_SearchSubDevices(int $InstanceID) { return Array(); }
 function ZW_ShutterMoveDown(int $InstanceID) { return true; }
@@ -993,15 +1050,29 @@ function ZW_StopAddNewPrimaryController(int $InstanceID) { return true; }
 function ZW_StopRemoveDevice(int $InstanceID) { return true; }
 function ZW_SwitchAllMode(int $InstanceID, int $Mode) { return true; }
 function ZW_SwitchMode(int $InstanceID, bool $DeviceOn) { return true; }
+function ZW_SwitchModeEx(int $InstanceID, bool $DeviceOn, int $Duration) { return true; }
 function ZW_Test(int $InstanceID) { return true; }
 function ZW_TestDevice(int $InstanceID, int $NodeID) { return true; }
 function ZW_ThermostatFanModeSet(int $InstanceID, int $FanMode) { return true; }
 function ZW_ThermostatModeSet(int $InstanceID, int $Mode) { return true; }
 function ZW_ThermostatSetPointSet(int $InstanceID, int $SetPoint, float $Value) { return true; }
+function ZW_UIAddAssociation(int $InstanceID, int $GroupID) { return true; }
+function ZW_UIAddParameter(int $InstanceID) { return true; }
+function ZW_UICancelUserCode(int $InstanceID) { return true; }
+function ZW_UICloseAddAssociationDialog(int $InstanceID) { return true; }
+function ZW_UICloseDialogs(int $InstanceID) { return true; }
+function ZW_UIIsParameterQueued(int $InstanceID, int $ID) { return true; }
+function ZW_UIOpenEditParameterDialog(int $InstanceID, int $ID, string $Name, string $Enum) { return true; }
+function ZW_UIReadCustomValues(int $InstanceID) { return true; }
+function ZW_UIReadValues(int $InstanceID) { return true; }
+function ZW_UISendCurrentConfigurationParameters(int $InstanceID) { return true; }
+function ZW_UISetRoutingOptions(int $InstanceID, bool $ShowRepeating, bool $ShowResponding) { return true; }
+function ZW_UIUpdateAssociations(int $InstanceID) { return true; }
+function ZW_UIUpdateConfigurationParameters(int $InstanceID) { return true; }
+function ZW_UIUpdateParameterSelection(int $InstanceID, int $ParameterValue) { return true; }
+function ZW_UIUpdateUserCodeList(int $InstanceID) { return true; }
 function ZW_UserCodeLearn(int $InstanceID, bool $Enabled) { return true; }
 function ZW_UserCodeRemove(int $InstanceID, int $Identifier) { return true; }
-function ZW_WakeUpComplete(int $InstanceID) { return true; }
-function ZW_WakeUpKeepAlive(int $InstanceID, bool $KeepAlive) { return true; }
 function ZW_WakeUpSetInterval(int $InstanceID, int $Seconds) { return true; }
 
 class IPSModule {
