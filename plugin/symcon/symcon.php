@@ -43,6 +43,9 @@ define('MODULETYPE_SPLITTER', 2);
 define('MODULETYPE_DEVICE', 3);
 define('MODULETYPE_CONFIGURATOR', 4);
 define('MODULETYPE_DISCOVERY', 5);
+/*
+define('MODULETYPE_VISUALISATION', 6);
+*/
 define('OBJECTTYPE_CATEGORY', 0);
 define('OBJECTTYPE_INSTANCE', 1);
 define('OBJECTTYPE_VARIABLE', 2);
@@ -228,6 +231,28 @@ define('IF_NEW', 1);
 define('IF_OLD', 2);
 define('IF_CURRENT', 3);
 define('IF_UNSUPPORTED', 4);
+
+/*
+define ('SENDER_ACTION', 'Action');
+define ('SENDER_DESIGNER', 'Designer');
+define ('SENDER_EXECUTE', 'Execute');
+define ('SENDER_HEATINGCONTROL', 'HeatingControl');
+define ('SENDER_OAUTH', 'OAuth');
+define ('SENDER_REGISTERVARIABLE', 'RegisterVariable');
+define ('SENDER_RUNSCRIPT', 'RunScript');
+define ('SENDER_SHUTDOWN', 'Shutdown');
+define ('SENDER_SHUTTERCONTROL', 'ShutterControl');
+define ('SENDER_STARTUP', 'Startup');
+define ('SENDER_STATUSEVENT', 'StatusEvent');
+define ('SENDER_TIMEREVENT', 'TimerEvent');
+define ('SENDER_VARIABLE', 'Variable');
+define ('SENDER_WATCHDOG', 'Watchdog');
+define ('SENDER_WEBFRONT', 'WebFront');
+define ('SENDER_WEBHOOK', 'WebHook');
+define ('SENDER_WEBINTERFACE', 'WebInterface');
+define ('SENDER_VOICECONTROL', 'VoiceControl');
+define ('SENDER_VOIP', 'VoIP ');
+*/
 
 function AC_AddLoggedValues(int $InstanceID, int $VariableID, array $Values) { return true; }
 function AC_ChangeVariableID(int $InstanceID, int $OldVariableID, int $NewVariableID) { return true; }
@@ -955,6 +980,25 @@ function VoIP_SendDTMF(int $InstanceID, int $ConnectionID, string $Digit) { retu
 function VoIP_SetData(int $InstanceID, int $ConnectionID, string $Data) { return true; }
 function WC_PushMessage(int $InstanceID, string $Hook, string $Data) { return true; }
 function WC_PushMessageEx(int $InstanceID, string $Hook, string $Data, string $RemoteIP, int $RemotePort) { return true; }
+/*
+function WAC_AddFile(int $InstanceID, string $Filename) { return true; }
+function WAC_ClearPlaylist(int $InstanceID) { return true; }
+function WAC_GetPlaylistFile(int $InstanceID) { return ''; }
+function WAC_GetPlaylistLength(int $InstanceID) { return 0; }
+function WAC_GetPlaylistPosition(int $InstanceID) { return 0; }
+function WAC_GetPlaylistTitle(int $InstanceID) { return ''; }
+function WAC_Next(int $InstanceID) { return true; }
+function WAC_Pause(int $InstanceID) { return true; }
+function WAC_Play(int $InstanceID) { return true; }
+function WAC_PlayFile(int $InstanceID, string $Filename) { return true; }
+function WAC_Prev(int $InstanceID) { return true; }
+function WAC_SetPlaylistPosition(int $InstanceID, int $Position) { return true; }
+function WAC_SetPosition(int $InstanceID, int $Seconds) { return true; }
+function WAC_SetRepeat(int $InstanceID, bool $DoRepeat) { return true; }
+function WAC_SetShuffle(int $InstanceID, bool $DoShuffle) { return true; }
+function WAC_SetVolume(int $InstanceID, bool $Volume) { return true; }
+function WAC_Stop(int $InstanceID) { return true; }
+*/
 function WEB_UpdateFormEnableSSL(int $InstanceID, bool $EnableSSL) { return true; }
 function WFC_AddItem(int $InstanceID, string $ID, string $ClassName, string $Configuration, string $ParentID) { return true; }
 function WFC_AudioNotification(int $InstanceID, string $Title, int $MediaID) { return true; }
@@ -1150,3 +1194,11 @@ class IPSModule {
     public function GetConfigurationForParent() { return ''; }
     public function Translate(string $Text) { return ''; }
 }
+
+/*
+class IPSList {
+    protected $position;
+    protected $selected;
+    protected $array;
+}
+*/
