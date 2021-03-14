@@ -43,6 +43,7 @@ define('MODULETYPE_SPLITTER', 2);
 define('MODULETYPE_DEVICE', 3);
 define('MODULETYPE_CONFIGURATOR', 4);
 define('MODULETYPE_DISCOVERY', 5);
+define('MODULETYPE_VISUALISATION', 6);
 define('OBJECTTYPE_CATEGORY', 0);
 define('OBJECTTYPE_INSTANCE', 1);
 define('OBJECTTYPE_VARIABLE', 2);
@@ -955,6 +956,23 @@ function VoIP_SendDTMF(int $InstanceID, int $ConnectionID, string $Digit) { retu
 function VoIP_SetData(int $InstanceID, int $ConnectionID, string $Data) { return true; }
 function WC_PushMessage(int $InstanceID, string $Hook, string $Data) { return true; }
 function WC_PushMessageEx(int $InstanceID, string $Hook, string $Data, string $RemoteIP, int $RemotePort) { return true; }
+function WAC_AddFile(int $InstanceID, string $Filename) { return true; }
+function WAC_ClearPlaylist(int $InstanceID) { return true; }
+function WAC_GetPlaylistFile(int $InstanceID) { return ''; }
+function WAC_GetPlaylistLength(int $InstanceID) { return 0; }
+function WAC_GetPlaylistPosition(int $InstanceID) { return 0; }
+function WAC_GetPlaylistTitle(int $InstanceID) { return ''; }
+function WAC_Next(int $InstanceID) { return true; }
+function WAC_Pause(int $InstanceID) { return true; }
+function WAC_Play(int $InstanceID) { return true; }
+function WAC_PlayFile(int $InstanceID, string $Filename) { return true; }
+function WAC_Prev(int $InstanceID) { return true; }
+function WAC_SetPlaylistPosition(int $InstanceID, int $Position) { return true; }
+function WAC_SetPosition(int $InstanceID, int $Seconds) { return true; }
+function WAC_SetRepeat(int $InstanceID, bool $DoRepeat) { return true; }
+function WAC_SetShuffle(int $InstanceID, bool $DoShuffle) { return true; }
+function WAC_SetVolume(int $InstanceID, bool $Volume) { return true; }
+function WAC_Stop(int $InstanceID) { return true; }
 function WEB_UpdateFormEnableSSL(int $InstanceID, bool $EnableSSL) { return true; }
 function WFC_AddItem(int $InstanceID, string $ID, string $ClassName, string $Configuration, string $ParentID) { return true; }
 function WFC_AudioNotification(int $InstanceID, string $Title, int $MediaID) { return true; }
@@ -1149,4 +1167,18 @@ class IPSModule {
     public function GetConfigurationForm() { return ''; }
     public function GetConfigurationForParent() { return ''; }
     public function Translate(string $Text) { return ''; }
+}
+
+class IPSList implements Iterator, JsonSerializable, ArrayAccess {
+    public function __construct($value) {}
+    public function rewind() {}
+    public function current() { return []; }
+    public function key() { return 0; }
+    public function next() {}
+    public function valid() { return true; }
+    public function offsetExists($i) { return true; }
+    public function offsetGet($i) { return []; }
+    public function offsetSet($i, $value){}
+    public function offsetUnset($i){}
+    public function jsonSerialize() { return []; }
 }
