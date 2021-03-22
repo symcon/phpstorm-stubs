@@ -229,6 +229,25 @@ define('IF_NEW', 1);
 define('IF_OLD', 2);
 define('IF_CURRENT', 3);
 define('IF_UNSUPPORTED', 4);
+define('SENDER_ACTION', 'Action');
+define('SENDER_DESIGNER', 'Designer');
+define('SENDER_EXECUTE', 'Execute');
+define('SENDER_HEATINGCONTROL', 'HeatingControl');
+define('SENDER_OAUTH', 'OAuth');
+define('SENDER_REGISTERVARIABLE', 'RegisterVariable');
+define('SENDER_RUNSCRIPT', 'RunScript');
+define('SENDER_SHUTDOWN', 'Shutdown');
+define('SENDER_SHUTTERCONTROL', 'ShutterControl');
+define('SENDER_STARTUP', 'Startup');
+define('SENDER_STATUSEVENT', 'StatusEvent');
+define('SENDER_TIMEREVENT', 'TimerEvent');
+define('SENDER_VARIABLE', 'Variable');
+define('SENDER_WATCHDOG', 'Watchdog');
+define('SENDER_WEBFRONT', 'WebFront');
+define('SENDER_WEBHOOK', 'WebHook');
+define('SENDER_WEBINTERFACE', 'WebInterface');
+define('SENDER_VOICECONTROL', 'VoiceControl');
+define('SENDER_VOIP', 'VoIP');
 
 function AC_AddLoggedValues(int $InstanceID, int $VariableID, array $Values) { return true; }
 function AC_ChangeVariableID(int $InstanceID, int $OldVariableID, int $NewVariableID) { return true; }
