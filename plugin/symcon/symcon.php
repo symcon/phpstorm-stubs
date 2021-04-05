@@ -990,7 +990,7 @@ function WAC_SetPlaylistPosition(int $InstanceID, int $Position) { return true; 
 function WAC_SetPosition(int $InstanceID, int $Seconds) { return true; }
 function WAC_SetRepeat(int $InstanceID, bool $DoRepeat) { return true; }
 function WAC_SetShuffle(int $InstanceID, bool $DoShuffle) { return true; }
-function WAC_SetVolume(int $InstanceID, bool $Volume) { return true; }
+function WAC_SetVolume(int $InstanceID, int $Volume) { return true; }
 function WAC_Stop(int $InstanceID) { return true; }
 function WEB_UpdateFormEnableSSL(int $InstanceID, bool $EnableSSL) { return true; }
 function WFC_AddItem(int $InstanceID, string $ID, string $ClassName, string $Configuration, string $ParentID) { return true; }
