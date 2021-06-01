@@ -234,7 +234,7 @@ function AC_AddLoggedValues(int $InstanceID, int $VariableID, array $Values) { r
 function AC_ChangeVariableID(int $InstanceID, int $OldVariableID, int $NewVariableID) { return true; }
 function AC_DeleteVariableData(int $InstanceID, int $VariableID, int $StartTime, int $EndTime) { return 0; }
 function AC_FetchChartData(int $InstanceID, int $ObjectID, int $StartTime, int $TimeSpan, int $Density) { return Array(); }
-function AC_GetAggregatedValues(int $InstanceID, int $VariableID, int $AggregationSpan, int $StartTime, int $EndTime, int $Limit) { return Array(); }
+function AC_GetAggregatedValues(int $InstanceID, int $VariableID, int $AggregationSpan, int $StartTime, int $EndTime, int $Limit) { return Array(); false;}
 function AC_GetAggregationType(int $InstanceID, int $VariableID) { return 0; }
 function AC_GetAggregationVariables(int $InstanceID, bool $CalculateStatistics) { return Array(); }
 function AC_GetGraphStatus(int $InstanceID, int $VariableID) { return true; }
