@@ -235,7 +235,7 @@ function AC_AddLoggedValues(int $InstanceID, int $VariableID, array $Values) { r
 function AC_ChangeVariableID(int $InstanceID, int $OldVariableID, int $NewVariableID) { return true; }
 function AC_DeleteVariableData(int $InstanceID, int $VariableID, int $StartTime, int $EndTime) { return 0; }
 function AC_FetchChartData(int $InstanceID, int $ObjectID, int $StartTime, int $TimeSpan, int $Density) { return Array(); }
-function AC_GetAggregatedValues(int $InstanceID, int $VariableID, int $AggregationSpan, int $StartTime, int $EndTime, int $Limit) { return Array(); }
+function AC_GetAggregatedValues(int $InstanceID, int $VariableID, int $AggregationSpan, int $StartTime, int $EndTime, int $Limit) { return Array(); return false;}
 function AC_GetAggregationType(int $InstanceID, int $VariableID) { return 0; }
 function AC_GetAggregationVariables(int $InstanceID, bool $CalculateStatistics) { return Array(); }
 function AC_GetGraphStatus(int $InstanceID, int $VariableID) { return true; }
@@ -427,7 +427,7 @@ function IPS_FunctionExists(string $FunctionName) { return true; }
 function IPS_GetActiveConnections() { return 0; }
 function IPS_GetAvailableUpdates() { return Array(); }
 function IPS_GetCategory(int $CategoryID) { return Array(); }
-function IPS_GetCategoryIDByName(string $Name, int $ParentID) { return 0; }
+function IPS_GetCategoryIDByName(string $Name, int $ParentID) { return 0; return false; }
 function IPS_GetCategoryList() { return Array(); }
 function IPS_GetChildrenIDs(int $ID) { return Array(); }
 function IPS_GetCompatibleInstances(int $InstanceID) { return Array(); }
@@ -439,7 +439,7 @@ function IPS_GetConfigurationsFromChildren(array $Parameter) { return Array(); }
 function IPS_GetConnectionList() { return Array(); }
 function IPS_GetDemoExpiration() { return 0; }
 function IPS_GetEvent(int $EventID) { return Array(); }
-function IPS_GetEventIDByName(string $Name, int $ParentID) { return 0; }
+function IPS_GetEventIDByName(string $Name, int $ParentID) { return 0; return false; }
 function IPS_GetEventList() { return Array(); }
 function IPS_GetEventListByType(int $EventType) { return Array(); }
 function IPS_GetFunction(string $FunctionName) { return Array(); }
@@ -449,7 +449,7 @@ function IPS_GetFunctions(array $InstanceIDs) { return Array(); }
 function IPS_GetFunctionsMap(array $InstanceIDs) { return Array(); }
 function IPS_GetIcons(array $Parameter) { return Array(); }
 function IPS_GetInstance(int $InstanceID) { return Array(); }
-function IPS_GetInstanceIDByName(string $Name, int $ParentID) { return 0; }
+function IPS_GetInstanceIDByName(string $Name, int $ParentID) { return 0; return false; }
 function IPS_GetInstanceList() { return Array(); }
 function IPS_GetInstanceListByModuleID(string $ModuleID) { return Array(); }
 function IPS_GetInstanceListByModuleType(int $ModuleType) { return Array(); }
@@ -471,7 +471,7 @@ function IPS_GetLimitServer() { return ''; }
 function IPS_GetLimitVariables() { return 0; }
 function IPS_GetLimitWebFront() { return 0; }
 function IPS_GetLink(int $LinkID) { return Array(); }
-function IPS_GetLinkIDByName(string $Name, int $ParentID) { return 0; }
+function IPS_GetLinkIDByName(string $Name, int $ParentID) { return 0; return false; }
 function IPS_GetLinkList() { return Array(); }
 function IPS_GetLiveConsoleCRC() { return ''; }
 function IPS_GetLiveConsoleFile() { return ''; }
@@ -483,7 +483,7 @@ function IPS_GetLogDir() { return ''; }
 function IPS_GetMedia(int $MediaID) { return Array(); }
 function IPS_GetMediaContent(int $MediaID) { return ''; }
 function IPS_GetMediaIDByFile(string $FilePath) { return 0; }
-function IPS_GetMediaIDByName(string $Name, int $ParentID) { return 0; }
+function IPS_GetMediaIDByName(string $Name, int $ParentID) { return 0; return false; }
 function IPS_GetMediaList() { return Array(); }
 function IPS_GetMediaListByType(int $MediaType) { return Array(); }
 function IPS_GetModule(string $ModuleID) { return Array(); }
@@ -492,8 +492,8 @@ function IPS_GetModuleListByType(int $ModuleType) { return Array(); }
 function IPS_GetModules(array $ModuleIDs) { return Array(); }
 function IPS_GetName(int $ID) { return ''; }
 function IPS_GetObject(int $ID) { return Array(); }
-function IPS_GetObjectIDByIdent(string $Ident, int $ParentID) { return 0; }
-function IPS_GetObjectIDByName(string $Name, int $ParentID) { return 0; }
+function IPS_GetObjectIDByIdent(string $Ident, int $ParentID) { return 0; return false; }
+function IPS_GetObjectIDByName(string $Name, int $ParentID) { return 0; return false; }
 function IPS_GetObjectList() { return Array(); }
 function IPS_GetOption(string $Option) { return ''; }
 function IPS_GetOptionList() { return Array(); }
@@ -504,8 +504,8 @@ function IPS_GetScript(int $ScriptID) { return Array(); }
 function IPS_GetScriptContent(int $ScriptID) { return ''; }
 function IPS_GetScriptEventList(int $ScriptID) { return Array(); }
 function IPS_GetScriptFile(int $ScriptID) { return ''; }
-function IPS_GetScriptIDByFile(string $FilePath) { return 0; }
-function IPS_GetScriptIDByName(string $Name, int $ParentID) { return 0; }
+function IPS_GetScriptIDByFile(string $FilePath) { return 0; return false; }
+function IPS_GetScriptIDByName(string $Name, int $ParentID) { return 0; return false; }
 function IPS_GetScriptList() { return Array(); }
 function IPS_GetScriptThread(int $ThreadID) { return Array(); }
 function IPS_GetScriptThreadList() { return Array(); }
@@ -519,7 +519,7 @@ function IPS_GetTimerList() { return Array(); }
 function IPS_GetTimers(array $TimerIDs) { return Array(); }
 function IPS_GetVariable(int $VariableID) { return Array(); }
 function IPS_GetVariableEventList(int $VariableID) { return Array(); }
-function IPS_GetVariableIDByName(string $Name, int $ParentID) { return 0; }
+function IPS_GetVariableIDByName(string $Name, int $ParentID) { return 0; return false; }
 function IPS_GetVariableList() { return Array(); }
 function IPS_GetVariableProfile(string $ProfileName) { return Array(); }
 function IPS_GetVariableProfileList() { return Array(); }
@@ -972,7 +972,7 @@ function WAC_SetPlaylistPosition(int $InstanceID, int $Position) { return true; 
 function WAC_SetPosition(int $InstanceID, int $Seconds) { return true; }
 function WAC_SetRepeat(int $InstanceID, bool $DoRepeat) { return true; }
 function WAC_SetShuffle(int $InstanceID, bool $DoShuffle) { return true; }
-function WAC_SetVolume(int $InstanceID, bool $Volume) { return true; }
+function WAC_SetVolume(int $InstanceID, int $Volume) { return true; }
 function WAC_Stop(int $InstanceID) { return true; }
 function WEB_UpdateFormEnableSSL(int $InstanceID, bool $EnableSSL) { return true; }
 function WFC_AddItem(int $InstanceID, string $ID, string $ClassName, string $Configuration, string $ParentID) { return true; }
